@@ -3,8 +3,6 @@
 
 import classes from "./Footer.module.css";
 import React from "react";
-// import Discord from "../../assets/la_discord.svg";
-// import Instagram from "../../assets/dashicons_instagram.svg";
 import { FiTwitter } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
 
@@ -24,12 +22,16 @@ const Footer = () => {
           </a>
         </div>
       </div>
+      <div className={classes.legal}>
+        <ul>
+          <li>Terms Of Use</li>
+          <li>Legal Stuff</li>
+          <li>Rules and Regulations</li>
+        </ul>
+      </div>
       <div className={classes.Copyright}>
         Copyright 2021 All rights reserved
       </div>
-      {/* <div className={classes.Copyright2}>
-        Developed & Designed by DSC Charusat with ❤
-      </div> */}
     </div>
   );
 };

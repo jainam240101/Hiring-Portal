@@ -1,0 +1,16 @@
+/** @format */
+
+.Container {
+  margin-left: 10%;
+  margin-right: 20%;
+  background-color: #bdc3c7;
+}
+.list {
+  flex-wrap: wrap;
+  background-color: yellow;
+  list-style: square;
+}
+.list li {
+  font-size: 18px;
+  margin-left: 5%;
+}

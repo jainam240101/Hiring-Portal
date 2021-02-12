@@ -32,14 +32,29 @@
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
   color: white;
-}
-.Copyright2 {
-  text-align: center;
   padding-bottom: 5%;
+}
+.legal {
+  /* background-color: aquamarine; */
+  margin-left: 20%;
+  margin-right: 20%;
+  border-bottom: 2px solid white;
+}
+.legal ul {
   margin-top: 3%;
+  margin-bottom: 3%;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+.legal ul li {
+  font-size: 18px;
   font-family: "Open Sans", sans-serif;
-  font-size: 20px;
   color: white;
+}
+.legal ul li:hover {
+  cursor: pointer;
+  color: #e26161;
 }
 @media (max-width: 1200px) {
   .links ul {
@@ -56,12 +71,6 @@
     text-align: center;
   }
   .Copyright {
-    margin-top: 7%;
-    font-size: 18px;
-    margin-left: 15%;
-    margin-right: 15%;
-  }
-  .Copyright2 {
     margin-top: 7%;
     font-size: 18px;
     margin-left: 15%;

@@ -1,0 +1,13 @@
+/** @format */
+
+.Heading {
+  font-size: 27px;
+  padding-top: 1%;
+  color: #3498db;
+  font-family: "Open Sans", serif;
+}
+@media (max-width: 1200px) {
+  .Heading {
+    font-size: 18px;
+  }
+}
