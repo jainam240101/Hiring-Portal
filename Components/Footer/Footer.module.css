@@ -1,0 +1,70 @@
+/** @format */
+
+.Container {
+  background-color: #2b303f;
+}
+.heading {
+  text-align: center;
+  color: white;
+  padding-top: 4%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.8rem;
+}
+
+.socials {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+}
+.box {
+  background-color: #40485e;
+  padding: 10px 15px;
+  margin-left: 1%;
+  margin-right: 2%;
+}
+.box:hover {
+  background-color: #e26161;
+  cursor: pointer;
+}
+.Copyright {
+  text-align: center;
+  margin-top: 3%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  color: white;
+}
+.Copyright2 {
+  text-align: center;
+  padding-bottom: 5%;
+  margin-top: 3%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  color: white;
+}
+@media (max-width: 1200px) {
+  .links ul {
+    align-items: center;
+    flex-direction: column;
+  }
+  .links {
+    padding-bottom: 7%;
+  }
+  .links li {
+    margin-left: 0;
+    font-size: 18px;
+    margin-top: 9%;
+    text-align: center;
+  }
+  .Copyright {
+    margin-top: 7%;
+    font-size: 18px;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  .Copyright2 {
+    margin-top: 7%;
+    font-size: 18px;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
