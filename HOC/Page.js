@@ -8,7 +8,9 @@ const Page = ({ children }) => {
   return (
     <Fragment>
       <Navbar />
+
       {children}
+
       <Footer />
     </Fragment>
   );

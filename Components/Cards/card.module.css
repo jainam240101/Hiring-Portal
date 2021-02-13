@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  width: 60%;
+  justify-content: flex-start;
+  flex-direction: column;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 1.4px;
+  padding: 0 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.paddingcontainer {
+    margin: 1rem;
+}
+.profileImageContainer {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.postImageContainer {
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  width: "100%";
+}
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.profileName {
+  font-size: 1.6rem;
+  font-weight: bold;
+
+}
+
+.caption {
+  font-size: 1.6rem;
+}

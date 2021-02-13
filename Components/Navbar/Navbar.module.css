@@ -1,12 +1,14 @@
 /** @format */
 
 .Container {
-  background-color: #001529;
+  background-color: white;
   display: flex;
   width: 100%;
-  padding: 0 10%;
+  max-width: 1000px;
+  margin: 0px auto;
   top: 0;
   justify-content: space-between;
+  align-items: center;
   animation: moveDown 0.5s ease-in-out;
   /* position: fixed; */
   z-index: 100;
@@ -18,6 +20,9 @@
 .img {
   height: 80px;
   width: 80px;
+  background-image: url('/public/logo.png');
+  border-radius: 50%;
+  background-color: #fff !important;
 }
 
 .btnArea {
@@ -25,32 +30,29 @@
   align-items: center;
 }
 .btn {
-  margin: 8% 0%;
   background: transparent;
-  width: 10vw;
-  height: 6vh;
-  border-radius: 10px;
-  color: white;
-  border: 1px solid white;
-  font-size: 18px;
+  padding: 5px 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  font-size: 1.3rem;
   font-family: "Open Sans", sans-serif;
-  margin-right: 10%;
 }
 .btn:hover {
   cursor: pointer;
   border: 1px solid #653ab9;
   background-color: #653ab9;
+  color: white;
 }
 
 .Links {
-  margin-top: 16%;
   display: flex;
+  margin: 0;
+  width: 100%;
   list-style: none;
 }
 .link {
-  color: white;
-  font-size: 20px;
-  margin-left: 18%;
+  font-size: 1.3rem;
+  margin-right: 18%;
   font-family: "Open Sans", sans-serif;
 }
 .link1 {
@@ -59,7 +61,7 @@
   font-family: "Open Sans", sans-serif;
 }
 
-.Links li:hover {
+.link:hover {
   cursor: pointer;
   color: #653ab9;
 }

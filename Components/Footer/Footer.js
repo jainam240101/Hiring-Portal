@@ -12,12 +12,12 @@ const Footer = () => {
       <p className={classes.heading}>Follow Us</p>
       <div className={classes.socials}>
         <div className={classes.box}>
-          <a target='_blank' href='https://discord.gg/XA8Qu9GPyV'>
+          <a target='_blank'>
             <FiTwitter size={30} />
           </a>
         </div>
         <div className={classes.box}>
-          <a target='_blank' href='https://instagram.com/hackbash'>
+          <a target='_blank'>
             <FaInstagram size={30} />
           </a>
         </div>
