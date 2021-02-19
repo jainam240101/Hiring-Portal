@@ -47,6 +47,13 @@ const index = () => {
                 <input type={"password"} className={classes.input} />
               </div>
             </div>
+            <div className={classes.flex}>
+              <label>Gender</label>
+              <select className={classes.select}>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
             <label className={classes.label}>Bio</label>
             <textarea className={(classes.input, classes.textarea)} />
             <div className={classes.flex}>

@@ -37,6 +37,14 @@
 .label {
   margin-top: 2%;
 }
+.select {
+  margin-left: 2%;
+  border: 1px solid #636e72;
+  padding: 5px 10px;
+}
+.select:focus {
+  outline: none;
+}
 .terms {
   font-size: 14px;
   margin-bottom: 3%;
@@ -47,7 +55,7 @@
   display: flex;
 }
 .margin {
-  margin-left: 5%;
+  margin-left: 4%;
 }
 .input {
   margin-top: 2%;
@@ -68,10 +76,10 @@
   width: 41vw;
   border-radius: 5px;
   font-family: "Open Sans", sans-serif;
-  height: 28vh;
+  height: 22vh;
   font-size: 18px;
-  resize: vertical;
-  max-height: 45vh;
+  resize: none;
+  margin-top: 1%;
   margin-bottom: 1%;
 }
 .checkbox {
