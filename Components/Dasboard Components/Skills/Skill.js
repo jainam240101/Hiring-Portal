@@ -1,9 +1,8 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Skills.module.css";
 import Heading from "../../HomePage Components/Headings/Heading";
-
 
 const Skill = ({ skills }) => {
   return (

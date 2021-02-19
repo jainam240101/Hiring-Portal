@@ -4,7 +4,7 @@
   background-color: white;
   display: flex;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0px auto;
   top: 0;
   justify-content: space-between;
@@ -20,7 +20,7 @@
 .img {
   height: 80px;
   width: 80px;
-  background-image: url('/public/logo.png');
+  background-image: url("/public/logo.png");
   border-radius: 50%;
   background-color: #fff !important;
 }
@@ -42,6 +42,9 @@
   border: 1px solid #653ab9;
   background-color: #653ab9;
   color: white;
+}
+.btn:focus {
+  outline: none;
 }
 
 .Links {

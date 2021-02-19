@@ -2,15 +2,13 @@
 
 .Container {
   margin-left: 10%;
-  margin-right: 20%;
-  background-color: #bdc3c7;
+  margin-right: 40%;
 }
 .list {
-  flex-wrap: wrap;
-  background-color: yellow;
-  list-style: square;
+  list-style: circle filled;
 }
 .list li {
+  font-family: "Open Sans", serif;
   font-size: 18px;
-  margin-left: 5%;
+  margin-top: 10%;
 }

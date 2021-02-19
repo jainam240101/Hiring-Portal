@@ -1,0 +1,10 @@
+/** @format */
+
+.skillContainer {
+  display: flex;
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: #c8d6e5;
+}
+
