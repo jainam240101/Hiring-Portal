@@ -1,9 +1,10 @@
 /** @format */
 
 import React from "react";
+import Page from "../../HOC/Page";
 
 const index = () => {
-  return <div>Feed</div>;
+  return <Page>Feed</Page>;
 };
 
 export default index;

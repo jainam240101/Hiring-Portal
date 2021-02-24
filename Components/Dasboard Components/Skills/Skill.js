@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Skills.module.css";
 import Heading from "../../HomePage Components/Headings/Heading";
 
@@ -8,11 +8,13 @@ const Skill = ({ skills }) => {
   return (
     <div className={classes.Container}>
       <Heading heading={"Skills"} />
-      <ul className={classes.list}>
-        {skills.map((element) => (
-          <li>{element}</li>
+      <div className={classes.skills}>
+        {skills.map((element, index) => (
+          <div key={index} className={classes.text}>
+            {element}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

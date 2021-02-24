@@ -2,18 +2,169 @@
 
 import Head from "next/head";
 import Page from "../HOC/Page";
-import styles from "../styles/Home.module.css";
 import Card from "../Components/Cards/Card";
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <Page>
-        <div
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        Hello
+        <br />
+        {/* <<br/>div
           style={{
             maxWidth: "1000px",
             margin: "0px auto",
@@ -40,7 +191,7 @@ export default function Home() {
             image="https://images.unsplash.com/photo-1613066803104-00fab99c0d5a?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             description="I love to hangout here"
           />
-        </div>
+        </div> */}
       </Page>
     </div>
   );

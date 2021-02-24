@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import classes from "./Experience.module.css"
+import classes from "./Experience.module.css";
 const Experience = ({ heading, role, duration }) => {
   return (
     <div className={classes.Container}>

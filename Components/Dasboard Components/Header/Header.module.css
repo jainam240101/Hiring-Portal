@@ -21,8 +21,17 @@
   margin-top: 3%;
   text-align: center;
   font-family: "Merriweather", serif;
-  font-size: 30px;
-  letter-spacing: 1.3px;
+  font-size: 35px;
+  letter-spacing: 1.5px;
+}
+.connection {
+  font-size: 18px;
+  margin-top: 2%;
+  font-family: "Noto Sans", sans-serif;
+  padding-left: 5%;
+}
+.Link {
+  color: salmon;
 }
 
 .Description {

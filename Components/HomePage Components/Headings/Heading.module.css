@@ -1,10 +1,10 @@
 /** @format */
 
 .Heading {
+  text-align: left;
   font-size: 30px;
-  padding-top: 1%;
-  color: #3498db;
-  font-family: "Open Sans", serif;
+  color: #1e272e;
+  font-family: "Montserrat", sans-serif;
 }
 @media (max-width: 1200px) {
   .Heading {

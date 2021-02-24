@@ -1,28 +1,30 @@
 /** @format */
 
 .Container {
-  background-color: white;
   display: flex;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0px auto;
-  top: 0;
+  width: 79vw;
+  background-color: #f6f6f6;
+  padding: 1% 5%;
   justify-content: space-between;
   align-items: center;
   animation: moveDown 0.5s ease-in-out;
   /* position: fixed; */
-  z-index: 100;
 }
-.logo {
+.searchContainer {
+  padding: 1% 2%;
   display: flex;
 }
 
-.img {
-  height: 80px;
-  width: 80px;
-  background-image: url("/public/logo.png");
-  border-radius: 50%;
-  background-color: #fff !important;
+.input {
+  margin-left: 4%;
+  background-color: #f6f6f6;
+  padding: 8px 10px;
+  border: none;
+  width: 20vw;
+}
+.input:focus {
+  border-bottom: 2px solid grey;
+  outline: none;
 }
 
 .btnArea {

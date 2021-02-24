@@ -1,0 +1,17 @@
+/** @format */
+
+.flex {
+  width: 100%;
+  display: flex;
+}
+
+.SideBar {
+  overflow: auto;
+  position: sticky;
+  width: 20%;
+  height: 100%;
+  top: 0;
+}
+.children {
+  width: 80%;
+}

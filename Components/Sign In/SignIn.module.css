@@ -3,17 +3,31 @@
 .Container {
   position: absolute;
   z-index: 110;
+  left: 0;
   display: flex;
-  margin-left: 25%;
+  justify-content: center;
+  width: 100%;
   margin-top: 33%;
 }
 
 .box {
   animation: moveDown 0.8s ease-in-out;
+  z-index: 111;
   display: block;
   margin: 0 auto;
   padding: 2% 8%;
   background-color: #222f3e;
+}
+.cross {
+  display: flex;
+  justify-content: flex-end;
+}
+.Cross:hover {
+  cursor: pointer;
+}
+.link {
+  color: #ee5253;
+  font-weight: bold;
 }
 
 .heading {

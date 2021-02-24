@@ -1,9 +1,59 @@
 /** @format */
 
 .Container {
-  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  background-color: #f6f6f6;
+  height: 100%;
+  width: 20vw;
+}
+.heading {
+  margin: 0;
+  text-align: center;
+  padding-top: 10%;
+  font-size: 25px;
+  font-family: "Noto Sans", sans-serif;
+}
+.subContainer {
+  margin-top: 10%;
+  margin-left: 15%;
+}
+.notActive:hover {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #74b9ff;
 }
 
+.subHeading {
+  color: #bcbcc6;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+}
+.activeLink {
+  display: flex;
+  padding: 3% 5%;
+  margin-top: 5%;
+  margin-right: 30%;
+  background-color: #0984e3;
+  border-radius: 5px;
+  font-size: 18px;
+  color: white;
+  margin-left: 4%;
+}
+.notActive {
+  display: flex;
+  padding: 3% 5%;
+  margin-top: 5%;
+  margin-right: 30%;
+  font-size: 18px;
+  margin-left: 4%;
+}
+.link {
+  font-family: "Open Sans", sans-serif;
+  margin-left: 10%;
+  font-size: 16px;
+}
 @keyframes moveRight {
   from {
     transform: translateX(10rem);
