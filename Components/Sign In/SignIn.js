@@ -9,12 +9,7 @@ const SignIn = ({ showSideDrawer }) => {
     <div className={classes.Container}>
       <div className={classes.box}>
         <div className={classes.cross}>
-          <ImCross
-            onClick={showSideDrawer}
-            className={classes.Cross}
-            color={"white"}
-            size={20}
-          />
+          <ImCross onClick={showSideDrawer} color={"white"} size={20} />
         </div>
         <h2 className={classes.heading}>Log In</h2>
         <p className={classes.text}>Email</p>

@@ -1,0 +1,24 @@
+/** @format */
+
+.Container {
+  display: flex;
+  padding: 1px 18px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.flex {
+  display: flex;
+}
+.text {
+  padding-left: 3%;
+}
+.margin {
+  display: flex;
+  margin-left: 2%;
+}
+.flex:hover,
+.margin:hover {
+  color: lightsalmon;
+  cursor: pointer;
+}

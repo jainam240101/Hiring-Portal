@@ -1,0 +1,32 @@
+/** @format */
+
+.newPost {
+  display: flex;
+  margin: 2% 15% 2% 15%;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.images img {
+  width: 80px;
+  height: 80px;
+}
+.input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 3%;
+  width: 100%;
+}
+.input input {
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 15px;
+  background: rgb(235, 235, 235);
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid rgb(235, 235, 235);
+}
+.input input:focus {
+  outline: none;
+}

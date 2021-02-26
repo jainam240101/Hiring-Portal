@@ -10,6 +10,7 @@ import { IoIosBriefcase } from "react-icons/io";
 import { GrGroup } from "react-icons/gr";
 import { MdNotificationsActive } from "react-icons/md";
 import { RiProfileLine } from "react-icons/ri";
+import { FcPrivacy, FcServices, FcContacts } from "react-icons/fc";
 
 const SideDrawer = () => {
   const [state, setstate] = useState("Home");
@@ -82,33 +83,33 @@ const SideDrawer = () => {
         </div>
       </div>
       <div className={classes.subContainer}>
-        <h3 className={classes.subHeading}>User Information</h3>
+        <h3 className={classes.subHeading}>Other Information</h3>
         <div
-          onClick={() => onClickHandler("/connections")}
+          onClick={() => onClickHandler("/privacypolicy")}
           className={
-            state === "connections" ? classes.activeLink : classes.notActive
+            state === "privacypolicy" ? classes.activeLink : classes.notActive
           }>
-          <GrGroup size={20} />
+          <FcPrivacy size={20} />
           <div className={classes.link}>
-            <Link href={"/connections"}>Privacy Policy</Link>
+            <Link href={"/privacypolicy"}>Privacy Policy</Link>
           </div>
         </div>
         <div
           className={
-            state === "notifications" ? classes.activeLink : classes.notActive
+            state === "service" ? classes.activeLink : classes.notActive
           }>
-          <MdNotificationsActive size={20} />
+          <FcServices size={20} />
           <div className={classes.link}>
-            <Link href={"/"}>Terms Of Service</Link>
+            <Link href={"/service"}>Terms Of Service</Link>
           </div>
         </div>
         <div
           className={
             state === "contact" ? classes.activeLink : classes.notActive
           }>
-          <RiProfileLine size={20} />
+          <FcContacts size={20} />
           <div className={classes.link}>
-            <Link href={"/profile"}>Contact Us</Link>
+            <Link href={"/contact"}>Contact Us</Link>
           </div>
         </div>
       </div>
