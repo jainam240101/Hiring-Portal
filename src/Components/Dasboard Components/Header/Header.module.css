@@ -14,12 +14,13 @@
 }
 .Container {
   margin-top: 2%;
+  padding: 0 2%;
 }
 
 .Heading {
   /* background-color: tomato; */
   margin-top: 3%;
-  text-align: center;
+  text-align: start;
   font-family: "Merriweather", serif;
   font-size: 35px;
   letter-spacing: 1.5px;
@@ -28,17 +29,14 @@
   font-size: 18px;
   margin-top: 2%;
   font-family: "Noto Sans", sans-serif;
-  padding-left: 5%;
 }
 .Link {
   color: salmon;
 }
 
 .Description {
-  padding-left: 5%;
   padding-top: 1%;
   line-height: 190%;
-  padding-right: 5%;
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
 }

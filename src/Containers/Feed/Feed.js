@@ -16,35 +16,77 @@ const Feed = () => {
     <Page>
       <div className={classes.newPost}>
         <div className={classes.images}>
-          <img src={"https://imgur.com/VUC5iQY.png"} alt='ProfilePic' />
+          <img
+            src={
+              "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            }
+            alt="ProfilePic"
+          />
         </div>
         <div className={classes.input}>
-          <input onClick={modalHandler} placeholder={"Create New Post"} />
+          <div className={classes.inputBox} onClick={modalHandler}>
+            Create new post
+          </div>
         </div>
       </div>
       <div className={classes.Cards}>
         <Card
-          Name={"Jainam Mehta"}
+          Name={"John doe"}
+          id={"12345"}
+          profilePic={
+            "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          }
+          time={"May,2021"}
+          likes={"200"}
+          comments={"10"}
+          Image={
+            "https://images.unsplash.com/photo-1614254480533-d2a816781d58?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMXx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          }
+        />
+
+        <Card
+          Name={"Something something"}
           description={
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
           }
           id={"12345"}
-          profilePic={"https://imgur.com/VUC5iQY.png"}
+          profilePic={
+            "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          }
+          time={"May,2021"}
+          likes={"200"}
+          comments={"10"}
+        />
+
+        <Card
+          Name={"kuch bhi"}
+          description={
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          }
+          id={"12345"}
+          profilePic={
+            "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          }
+          Image={
+            "https://images.unsplash.com/photo-1614254480533-d2a816781d58?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMXx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          }
           time={"May,2021"}
           likes={"200"}
           comments={"10"}
         />
       </div>
-      {modal ? (
+      {modal && (
         <div>
           <Modal
             modalHandler={modalHandler}
-            profilePic={"https://imgur.com/VUC5iQY.png"}
-            name={"Jainam Mehta"}
+            profilePic={
+              "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            }
+            name={"John doe"}
           />
           <Backdrop showSideDrawer={modalHandler} />
         </div>
-      ) : null}
+      )}
     </Page>
   );
 };

@@ -1,10 +1,11 @@
 /** @format */
 
 .Container {
+
   margin-top: 2%;
   /* background-color: tomato; */
-  margin-left: 9%;
   display: flex;
+  align-items: center;
 }
 
 .heading {
