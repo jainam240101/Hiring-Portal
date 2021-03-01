@@ -2,7 +2,6 @@
 
 .Container {
   display: flex;
-  padding: 1px 18px;
   margin-top: 1%;
   margin-bottom: 1%;
 }
@@ -11,11 +10,11 @@
   display: flex;
 }
 .text {
-  padding-left: 3%;
+  margin-left: 4px;
 }
 .margin {
   display: flex;
-  margin-left: 2%;
+  margin-left: 10px;
 }
 .flex:hover,
 .margin:hover {

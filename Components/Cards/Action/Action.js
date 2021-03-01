@@ -7,19 +7,19 @@ const Action = ({ showShare }) => {
   return (
     <div className={classes.Container}>
       <div className={classes.flex}>
-        <BiLike size={20} />
+        <BiLike size={22} />
         <span className={classes.text}>Like</span>
       </div>
       <div className={classes.margin}>
-        <BiComment size={20} />
+        <BiComment size={22} />
         <span className={classes.text}>Comment</span>
       </div>
-      {showShare ? (
+      {showShare && (
         <div className={classes.margin}>
-          <BiShare size={20} />
+          <BiShare size={22} />
           <span className={classes.text}>Share</span>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

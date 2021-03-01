@@ -11,16 +11,16 @@ const index = () => {
         <div className={classes.Container}>
           <div className={classes.SVGContainer}>
             <Image
-              height='450px'
-              width='500px'
+              height="450px"
+              width="500px"
               className={classes.svg}
               src={"/Register.svg"}
             />
           </div>
           <div className={classes.form}>
             <h3 className={classes.heading}>Welcome to Talent Hunt</h3>
-            <div className={classes.flex}>
-              <div>
+            <div className={classes.flex} style={{ marginTop: "1%" }}>
+              <div className={classes.flexColumn}>
                 <label className={classes.label}>Name</label>
                 <input
                   type={"text"}
@@ -28,7 +28,7 @@ const index = () => {
                   className={classes.input}
                 />
               </div>
-              <div>
+              <div className={classes.flexColumn}>
                 <label className={classes.label}>Email</label>
                 <input
                   type={"email"}
@@ -38,16 +38,16 @@ const index = () => {
               </div>
             </div>
             <div className={classes.flex}>
-              <div>
+              <div className={classes.flexColumn}>
                 <label className={classes.label}>Password</label>
-                <input type={"password"} className={classes.input} />
+                <input type={"text"} className={classes.input} />
               </div>
-              <div className={classes.margin}>
-                <label className={classes.label}>Confirm Password</label>
-                <input type={"password"} className={classes.input} />
+              <div className={classes.flexColumn}>
+                <label className={classes.label}>Confirm password</label>
+                <input type={"email"} className={classes.input} />
               </div>
             </div>
-            <div className={classes.flex}>
+            <div className={classes.flex} style={{justifyContent:'flex-start'}}>
               <label>Gender</label>
               <select className={classes.select}>
                 <option>Male</option>

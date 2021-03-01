@@ -10,6 +10,7 @@
 .images img {
   width: 80px;
   height: 80px;
+  border-radius: 10px
 }
 .input {
   display: flex;
@@ -17,6 +18,15 @@
   justify-content: center;
   margin-left: 3%;
   width: 100%;
+}
+.inputBox {
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 15px;
+  background: rgb(235, 235, 235);
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid rgb(235, 235, 235);
 }
 .input input {
   border: none;
