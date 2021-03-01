@@ -1,16 +1,11 @@
 /** @format */
+
 .background {
-  background-color: #0d8abc;
-  display: flex;
-  flex: 1;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
+  background-color: #3040c4;
+  padding: 2% 5%;
 }
 .Container {
   display: flex;
-  margin: auto;
-  width: 80%;
   border-radius: 25px;
   background: white;
   font-family: "Montserrat", sans-serif;
@@ -18,6 +13,8 @@
 
 .SVGContainer {
   margin-left: 0%;
+  padding-left: 3%;
+  padding-right: 3%;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   background: #f9d9eb;
@@ -31,14 +28,12 @@
   display: flex;
   flex-direction: column;
   width: 60%;
-  display: flex;
-  flex-direction: column;
   margin: 0 2%;
 }
 
 .heading {
   font-size: 28px;
-  text-align: start;
+  text-align: center;
   letter-spacing: 1.5px;
 }
 .label {
@@ -59,30 +54,19 @@
 .flex {
   margin-top: 3%;
   display: flex;
-  flex: 1;
-  justify-content: space-between;
   align-items: center;
 }
-.flexColumn {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 50%;
-}
 .margin {
-  /* background: #0984e3; */
-  margin-left: 2%;
+  margin-left: 5%;
 }
 .input {
-  width: 95%;
   margin-top: 2%;
   width: 22vw;
   font-family: "Open Sans", sans-serif;
   border-radius: 5px;
   border: 1px solid #636e72;
-  font-size: 16px;
-  padding: 12px;
   font-size: 17px;
+  padding: 10px;
 }
 .input:focus,
 .textarea:focus {
@@ -90,20 +74,17 @@
   border: 2px solid #0984e3;
 }
 .textarea {
-  padding: 10px;
   width: 45vw;
-  width: 98%;
   border-radius: 5px;
   font-family: "Open Sans", sans-serif;
-  height: 25vh;
-  font-size: 16px;
+  height: 22vh;
+  font-size: 18px;
   resize: none;
   margin-top: 1%;
   margin-bottom: 1%;
 }
 .checkbox {
   margin-left: 0%;
-  padding-left: 0%;
   height: 3vh;
   width: 3vw;
 }
@@ -112,7 +93,6 @@
   display: flex;
   margin-top: 2%;
   margin-bottom: 4%;
-  margin: 2%;
   justify-content: center;
 }
 .btn {
