@@ -15,7 +15,6 @@ const SideDrawer = () => {
   const [state, setstate] = useState("Home");
   const router = useHistory();
   useEffect(() => {
-    console.log(router.location.pathname);
     setstate(router.location.pathname.split("/")[1]);
   }, []);
   const onClickHandler = (value) => {

@@ -1,10 +1,35 @@
 /** @format */
 
-import React, { Fragment } from "react";
+import React, { Fragment, useReducer } from "react";
 import classes from "./Register.module.css";
 import RegisterSVG from "../../assets/Register.svg";
+import { useMutation } from "@apollo/client";
+import { RegisterHandler } from "./Mutation";
+import { useForm } from "../../Hooks/useForm";
 
 const Register = () => {
+  const [signUp] = useMutation(RegisterHandler);
+  const [state, dispatch] = useReducer(useForm, {
+    Name: "",
+    Email: "",
+    Password: "",
+    ConfirmPassword: "",
+    Gender: "",
+    Bio: "",
+  });
+  const SubmitHandler = async () => {
+    const { errors, data } = await signUp({
+      variables: {
+        name: state.Name,
+        email: state.Email,
+        password: state.Password,
+        gender: state.Gender,
+        bio: state.Bio,
+      },
+    });
+    console.log(errors);
+    console.log(data);
+  };
   return (
     <Fragment>
       <div className={classes.background}>
@@ -28,12 +53,34 @@ const Register = () => {
                   type={"text"}
                   placeholder={"Mark Cuban"}
                   className={classes.input}
+                  value={state.Name}
+                  name='Name'
+                  onChange={(event) => {
+                    dispatch({
+                      type: "change",
+                      data: {
+                        payload: event.target.value,
+                        type: event.target.name,
+                      },
+                    });
+                  }}
                 />
               </div>
               <div className={classes.margin}>
                 <label className={classes.label}>Email</label>
                 <br />
                 <input
+                  value={state.Email}
+                  name='Email'
+                  onChange={(event) => {
+                    dispatch({
+                      type: "change",
+                      data: {
+                        payload: event.target.value,
+                        type: event.target.name,
+                      },
+                    });
+                  }}
                   type={"email"}
                   placeholder={"mark.cuban@gmail.com"}
                   className={classes.input}
@@ -44,23 +91,76 @@ const Register = () => {
               <div>
                 <label className={classes.label}>Password</label>
                 <br />
-                <input type={"password"} className={classes.input} />
+                <input
+                  value={state.Password}
+                  onChange={(event) => {
+                    dispatch({
+                      type: "change",
+                      data: {
+                        payload: event.target.value,
+                        type: event.target.name,
+                      },
+                    });
+                  }}
+                  name='Password'
+                  type={"password"}
+                  className={classes.input}
+                />
               </div>
               <div className={classes.margin}>
                 <label className={classes.label}>Confirm Password</label>
                 <br />
-                <input type={"password"} className={classes.input} />
+                <input
+                  value={state.ConfirmPassword}
+                  name='ConfirmPassword'
+                  onChange={(event) => {
+                    dispatch({
+                      type: "change",
+                      data: {
+                        payload: event.target.value,
+                        type: event.target.name,
+                      },
+                    });
+                  }}
+                  type={"password"}
+                  className={classes.input}
+                />
               </div>
             </div>
             <div className={classes.flex}>
               <label>Gender</label>
-              <select className={classes.select}>
+              <select
+                name='Gender'
+                onChange={(event) => {
+                  dispatch({
+                    type: "change",
+                    data: {
+                      payload: event.target.value,
+                      type: event.target.name,
+                    },
+                  });
+                }}
+                className={classes.select}>
+                <option disabled={"true"}>Select</option>
                 <option>Male</option>
                 <option>Female</option>
               </select>
             </div>
             <label className={classes.label}>Bio</label>
-            <textarea className={(classes.input, classes.textarea)} />
+            <textarea
+              value={state.Bio}
+              name='Bio'
+              onChange={(event) => {
+                dispatch({
+                  type: "change",
+                  data: {
+                    payload: event.target.value,
+                    type: event.target.name,
+                  },
+                });
+              }}
+              className={(classes.input, classes.textarea)}
+            />
             <div className={classes.flex}>
               <input type={"checkbox"} className={classes.checkbox} />
               <label className={classes.terms}>
@@ -69,7 +169,9 @@ const Register = () => {
               </label>
             </div>
             <div className={classes.btnContainer}>
-              <button className={classes.btn}>Register</button>
+              <button onClick={SubmitHandler} className={classes.btn}>
+                Register
+              </button>
             </div>
           </div>
         </div>

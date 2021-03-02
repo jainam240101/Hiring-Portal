@@ -27,7 +27,6 @@ const Navbar = ({ showSideDrawer }) => {
   }, [prevScrollPos, visible, handleScroll]);
 
   const buttonHandler = () => {
-    console.log("pressed");
     setSigninHandler(!SigninHandler);
   };
   return (
