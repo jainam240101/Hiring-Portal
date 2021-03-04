@@ -5,7 +5,7 @@ import classes from "./Register.module.css";
 import RegisterSVG from "../../assets/Register.svg";
 import { useMutation } from "@apollo/client";
 import { RegisterHandler } from "./Mutation";
-import { useForm } from "../../Hooks/useForm";
+import { useForm, onChangehandler } from "../../Hooks/useForm";
 
 const Register = () => {
   const [signUp] = useMutation(RegisterHandler);
@@ -56,13 +56,11 @@ const Register = () => {
                   value={state.Name}
                   name='Name'
                   onChange={(event) => {
-                    dispatch({
-                      type: "change",
-                      data: {
-                        payload: event.target.value,
-                        type: event.target.name,
-                      },
-                    });
+                    onChangehandler(
+                      dispatch,
+                      event.target.name,
+                      event.target.value
+                    );
                   }}
                 />
               </div>
@@ -73,13 +71,11 @@ const Register = () => {
                   value={state.Email}
                   name='Email'
                   onChange={(event) => {
-                    dispatch({
-                      type: "change",
-                      data: {
-                        payload: event.target.value,
-                        type: event.target.name,
-                      },
-                    });
+                    onChangehandler(
+                      dispatch,
+                      event.target.name,
+                      event.target.value
+                    );
                   }}
                   type={"email"}
                   placeholder={"mark.cuban@gmail.com"}
@@ -94,13 +90,11 @@ const Register = () => {
                 <input
                   value={state.Password}
                   onChange={(event) => {
-                    dispatch({
-                      type: "change",
-                      data: {
-                        payload: event.target.value,
-                        type: event.target.name,
-                      },
-                    });
+                    onChangehandler(
+                      dispatch,
+                      event.target.name,
+                      event.target.value
+                    );
                   }}
                   name='Password'
                   type={"password"}
@@ -114,13 +108,11 @@ const Register = () => {
                   value={state.ConfirmPassword}
                   name='ConfirmPassword'
                   onChange={(event) => {
-                    dispatch({
-                      type: "change",
-                      data: {
-                        payload: event.target.value,
-                        type: event.target.name,
-                      },
-                    });
+                    onChangehandler(
+                      dispatch,
+                      event.target.name,
+                      event.target.value
+                    );
                   }}
                   type={"password"}
                   className={classes.input}
@@ -132,13 +124,11 @@ const Register = () => {
               <select
                 name='Gender'
                 onChange={(event) => {
-                  dispatch({
-                    type: "change",
-                    data: {
-                      payload: event.target.value,
-                      type: event.target.name,
-                    },
-                  });
+                  onChangehandler(
+                    dispatch,
+                    event.target.name,
+                    event.target.value
+                  );
                 }}
                 className={classes.select}>
                 <option disabled={"true"}>Select</option>
@@ -151,13 +141,11 @@ const Register = () => {
               value={state.Bio}
               name='Bio'
               onChange={(event) => {
-                dispatch({
-                  type: "change",
-                  data: {
-                    payload: event.target.value,
-                    type: event.target.name,
-                  },
-                });
+                onChangehandler(
+                  dispatch,
+                  event.target.name,
+                  event.target.value
+                );
               }}
               className={(classes.input, classes.textarea)}
             />

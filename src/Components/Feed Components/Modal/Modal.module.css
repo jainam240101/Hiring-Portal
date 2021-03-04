@@ -36,7 +36,7 @@
   letter-spacing: 1.2px;
 }
 .textArea {
-  margin-top: 2%;
+  margin-top: 3%;
   font-size: 16px;
   padding: 10px;
   width: 100%;
@@ -58,6 +58,13 @@
   height: 80px;
   width: 80px;
   border-radius: 50%;
+}
+.submitContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.image:hover {
+  cursor: pointer;
 }
 .btn {
   padding: 8px 35px;

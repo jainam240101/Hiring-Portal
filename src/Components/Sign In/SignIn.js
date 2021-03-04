@@ -6,7 +6,7 @@ import { useMutation } from "@apollo/client";
 import { ImCross } from "react-icons/im";
 import classes from "./SignIn.module.css";
 import { SIGN_IN } from "./Mutations";
-import { useForm } from "../../Hooks/useForm";
+import { useForm, onChangehandler } from "../../Hooks/useForm";
 
 const SignIn = ({ showSideDrawer }) => {
   const [state, dispatch] = useReducer(useForm, { email: "", password: "" });
@@ -33,19 +33,13 @@ const SignIn = ({ showSideDrawer }) => {
           value={state.email}
           placeholder={"Email"}
           onChange={(event) => {
-            dispatch({
-              type: "change",
-              data: { payload: event.target.value, type: event.target.name },
-            });
+            onChangehandler(dispatch, event.target.name, event.target.value);
           }}
         />
         <p className={classes.text}>Password</p>
         <input
           onChange={(event) => {
-            dispatch({
-              type: "change",
-              data: { payload: event.target.value, type: event.target.name },
-            });
+            onChangehandler(dispatch, event.target.name, event.target.value);
           }}
           name='password'
           value={state.password}
