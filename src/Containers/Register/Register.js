@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { Fragment, useReducer } from "react";
+import React, { useReducer } from "react";
 import classes from "./Register.module.css";
 import RegisterSVG from "../../assets/Register.svg";
 import { useMutation } from "@apollo/client";

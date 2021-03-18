@@ -5,6 +5,7 @@ const path = {
   register: "/register",
   feed: "/feed",
   profile: "/profile",
+  signIn: "/signin",
 };
 
 export default path;
