@@ -7,7 +7,8 @@ import Card from "../../Components/Cards/Card";
 import Modal from "../../Components/Feed Components/Modal/Modal";
 import Backdrop from "../../Components/Navbar/Backdrop/Backdrop";
 import { useLazyQuery } from "@apollo/client";
-import { Queries } from "./Queries";
+import { getProfilePic, Queries } from "./Queries";
+import { cache } from "../../index";
 
 const Feed = () => {
   const [modal, setmodal] = useState(false);
@@ -15,6 +16,9 @@ const Feed = () => {
   const [check, setCheck] = useState(1);
   const [getPost, { loading, data, error, fetchMore }] = useLazyQuery(Queries, {
     variables: { pageNo: 0 },
+  });
+  const profiledata = cache.readQuery({
+    query: getProfilePic,
   });
 
   useEffect(() => {
@@ -45,12 +49,7 @@ const Feed = () => {
     <Page>
       <div className={classes.newPost}>
         <div className={classes.images}>
-          <img
-            src={
-              "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-            }
-            alt="ProfilePic"
-          />
+          <img src={profiledata?.getMe.profilePic} alt='ProfilePic' />
         </div>
         <div className={classes.input}>
           <div className={classes.inputBox} onClick={modalHandler}>

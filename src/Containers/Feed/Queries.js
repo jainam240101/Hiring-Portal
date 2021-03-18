@@ -1,3 +1,5 @@
+/** @format */
+
 import { gql } from "@apollo/client";
 
 export const Queries = gql`
@@ -17,7 +19,7 @@ export const Queries = gql`
           email
           gender
           profilePic
-          bio 
+          bio
         }
         comments {
           comment
@@ -30,6 +32,14 @@ export const Queries = gql`
           }
         }
       }
+    }
+  }
+`;
+
+export const getProfilePic = gql`
+  query getProfilePic {
+    getMe {
+      profilePic
     }
   }
 `;
