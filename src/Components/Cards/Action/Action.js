@@ -1,21 +1,25 @@
 /** @format */
 
-import React from "react";
+import React, { memo } from "react";
 import classes from "./Action.module.css";
 import { BiLike, BiComment, BiShare } from "react-icons/bi";
-const Action = ({ showShare }) => {
+const Action = ({ showShare = true, showLike = true, showComment = true }) => {
   return (
     <div className={classes.Container}>
-      <div className={classes.flex}>
-        <BiLike size={22} />
-        <span className={classes.text}>Like</span>
-      </div>
-      <div className={classes.margin}>
-        <BiComment size={22} />
-        <span className={classes.text}>Comment</span>
-      </div>
+      {showLike && (
+        <div className={classes.flex}>
+          <BiLike size={22} />
+          <span className={classes.text}>Like</span>
+        </div>
+      )}
+      {showComment && (
+        <div className={classes.flex}>
+          <BiComment size={22} />
+          <span className={classes.text}>Comment</span>
+        </div>
+      )}
       {showShare && (
-        <div className={classes.margin}>
+        <div className={classes.flex}>
           <BiShare size={22} />
           <span className={classes.text}>Share</span>
         </div>
@@ -24,4 +28,4 @@ const Action = ({ showShare }) => {
   );
 };
 
-export default Action;
+export default memo(Action);

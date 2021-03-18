@@ -7,7 +7,8 @@ import { ImCross } from "react-icons/im";
 import classes from "./SignIn.module.css";
 import { SIGN_IN } from "./Mutations";
 import { useForm, onChangehandler } from "../../Hooks/useForm";
-
+import Cookie from "universal-cookie";
+const CookieService = new Cookie();
 const SignIn = ({ showSideDrawer }) => {
   const [state, dispatch] = useReducer(useForm, { email: "", password: "" });
   const [signIn] = useMutation(SIGN_IN);
@@ -16,7 +17,11 @@ const SignIn = ({ showSideDrawer }) => {
       variables: { email: state.email, password: state.password },
     });
     console.log(errors);
-    console.log(data);
+    console.log(data.signIn);
+    if (data.signIn.success) {
+      let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
+      CookieService.set("userSession", data.signIn.cookie, options);
+    }
   };
   return (
     <div className={classes.Container}>
@@ -27,7 +32,7 @@ const SignIn = ({ showSideDrawer }) => {
         <h2 className={classes.heading}>Log In</h2>
         <p className={classes.text}>Email</p>
         <input
-          name='email'
+          name="email"
           className={classes.input}
           type={"email"}
           value={state.email}
@@ -41,7 +46,7 @@ const SignIn = ({ showSideDrawer }) => {
           onChange={(event) => {
             onChangehandler(dispatch, event.target.name, event.target.value);
           }}
-          name='password'
+          name="password"
           value={state.password}
           className={classes.input}
           type={"password"}

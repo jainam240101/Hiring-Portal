@@ -2,11 +2,13 @@
 
 .background {
   background-color: #3040c4;
-  padding: 2% 5%;
+  padding: 2% 0;
 }
 .Container {
+  width: 80%;
+  margin: auto;
   display: flex;
-  border-radius: 25px;
+  border-radius: 10px;
   background: white;
   font-family: "Montserrat", sans-serif;
 }
@@ -15,8 +17,7 @@
   margin-left: 0%;
   padding-left: 3%;
   padding-right: 3%;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+
   background: #f9d9eb;
   display: flex;
   flex-direction: column;
@@ -32,6 +33,7 @@
 }
 
 .heading {
+  margin: 0;
   font-size: 28px;
   text-align: center;
   letter-spacing: 1.5px;
@@ -55,13 +57,17 @@
   margin-top: 3%;
   display: flex;
   align-items: center;
+
+  justify-content: space-between;
 }
-.margin {
-  margin-left: 5%;
+.col {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
 }
 .input {
   margin-top: 2%;
-  width: 22vw;
+  width: "50%";
   font-family: "Open Sans", sans-serif;
   border-radius: 5px;
   border: 1px solid #636e72;
@@ -74,10 +80,10 @@
   border: 2px solid #0984e3;
 }
 .textarea {
-  width: 45vw;
+  width: 100%;
   border-radius: 5px;
   font-family: "Open Sans", sans-serif;
-  height: 22vh;
+  height: 20vh;
   font-size: 18px;
   resize: none;
   margin-top: 1%;

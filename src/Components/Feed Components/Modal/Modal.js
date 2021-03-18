@@ -10,25 +10,32 @@ import { createPostMutation } from "./Mutation";
 
 const Modal = ({ profilePic, name, modalHandler }) => {
   const [createPost] = useMutation(createPostMutation);
-  const [state, dispatch] = useReducer(useForm, { description: "" });
+  const [state, dispatch] = useReducer(useForm, {
+    description: "",
+    mediaLink: "",
+  });
   const uploadImage = (event) => {
     let files = event.target.files;
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (e) => {
-      console.log("img data ", e.target.result);
+      onChangehandler(dispatch, event.target.name, e.target.result);
     };
   };
   const submitHandler = async () => {
-    const { data, errors } = await createPost({
+    console.log(state);
+    const { data } = await createPost({
       variables: {
         postType: "Temp",
         description: state.description,
-        mediaLink: "hello",
+        mediaLink: state.mediaLink,
       },
     });
-    console.log(errors);
-    console.log(data);
+    const { success, message, error } = data.createPost;
+    console.log(success, message, error);
+  };
+  const handleChange = (event) => {
+    onChangehandler(dispatch, event.target.name, event.target.value);
   };
   return (
     <div className={classes.Container}>
@@ -49,21 +56,21 @@ const Modal = ({ profilePic, name, modalHandler }) => {
           <div className={classes.name}>{name}</div>
         </div>
         <textarea
-          name='description'
-          onChange={(event) => {
-            onChangehandler(dispatch, event.target.name, event.target.value);
-          }}
+          name="description"
+          onChange={handleChange}
           className={classes.textArea}
           placeholder={"What Do you want to talk about?"}
         />
         <div className={classes.submitContainer}>
           <input
+            name="mediaLink"
             style={{ display: "none" }}
-            type='file'
-            id='icon-button-file'
-            onChange={(event) => uploadImage(event)}
+            type="file"
+            id="icon-button-file"
+            accept="image/*"
+            onChange={uploadImage}
           />
-          <label htmlFor='icon-button-file'>
+          <label htmlFor="icon-button-file">
             <BsCardImage className={classes.image} size={23} />
           </label>
           <button onClick={submitHandler} className={classes.btn}>

@@ -1,17 +1,46 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Page from "../../HOC/Page";
 import classes from "./Feed.module.css";
 import Card from "../../Components/Cards/Card";
 import Modal from "../../Components/Feed Components/Modal/Modal";
 import Backdrop from "../../Components/Navbar/Backdrop/Backdrop";
+import { useLazyQuery } from "@apollo/client";
+import { Queries } from "./Queries";
 
 const Feed = () => {
   const [modal, setmodal] = useState(false);
+  const [feedData, setFeedData] = useState([]);
+  const [check, setCheck] = useState(1);
+  const [getPost, { loading, data, error, fetchMore }] = useLazyQuery(Queries, {
+    variables: { pageNo: 0 },
+  });
+
+  useEffect(() => {
+    if (data) {
+      setFeedData((prevData) => {
+        return [...prevData, ...data.getPosts.data];
+      });
+    }
+  }, [data]);
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [error]);
+
+  useEffect(async () => {
+    getPost({
+      variables: { pageNo: 0 },
+    });
+  }, []);
   const modalHandler = () => {
     setmodal(!modal);
   };
+  const addPost = useCallback(() => {}, []);
+  if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error :</p>;
   return (
     <Page>
       <div className={classes.newPost}>
@@ -30,50 +59,13 @@ const Feed = () => {
         </div>
       </div>
       <div className={classes.Cards}>
-        <Card
-          Name={"John doe"}
-          id={"12345"}
-          profilePic={
-            "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-          }
-          time={"May,2021"}
-          likes={"200"}
-          comments={"10"}
-          Image={
-            "https://images.unsplash.com/photo-1614254480533-d2a816781d58?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMXx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-          }
-        />
-
-        <Card
-          Name={"Something something"}
-          description={
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          }
-          id={"12345"}
-          profilePic={
-            "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-          }
-          time={"May,2021"}
-          likes={"200"}
-          comments={"10"}
-        />
-
-        <Card
-          Name={"kuch bhi"}
-          description={
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          }
-          id={"12345"}
-          profilePic={
-            "https://images.unsplash.com/photo-1610764231870-5290c68d4299?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-          }
-          Image={
-            "https://images.unsplash.com/photo-1614254480533-d2a816781d58?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMXx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-          }
-          time={"May,2021"}
-          likes={"200"}
-          comments={"10"}
-        />
+        {!loading && feedData.length > 0 && (
+          <>
+            {feedData.map((item, index) => {
+              return <Card data={item} key={item.id} />;
+            })}
+          </>
+        )}
       </div>
       {modal && (
         <div>

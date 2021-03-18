@@ -8,16 +8,13 @@
 
 .flex {
   display: flex;
+  margin-right: 10px;
 }
 .text {
   margin-left: 4px;
 }
-.margin {
-  display: flex;
-  margin-left: 10px;
-}
-.flex:hover,
-.margin:hover {
+
+.flex:hover{
   color: lightsalmon;
   cursor: pointer;
 }

@@ -11,13 +11,26 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import App from "./App";
-
+import { setContext } from "@apollo/client/link/context";
+import Cookie from "universal-cookie";
+const CookieService = new Cookie();
 export const cache = new InMemoryCache();
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
 });
+
+const authLink = setContext((_, { headers }) => {
+  const token = CookieService.get("userSession");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `${token}` : "",
+    },
+  };
+});
+
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: cache,
 });
 

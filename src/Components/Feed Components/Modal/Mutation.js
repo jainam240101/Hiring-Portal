@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 export const createPostMutation = gql`
   mutation CreatePost(
@@ -9,12 +9,13 @@ export const createPostMutation = gql`
     createPost(
       input: {
         postType: $postType
-        description: $description 
+        description: $description
         mediaLink: $mediaLink
       }
     ) {
       success
       message
+      error
       data {
         postedBy {
           name
