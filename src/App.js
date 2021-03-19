@@ -33,11 +33,11 @@ const App = () => {
   }
   return (
     <Switch>
-      <Route path={Paths.feed} component={Feed} />
+      <Route path={Paths.signIn} exact component={SignIn} />
+      <Route path={Paths.homepage} component={Feed} />
       <Route path={Paths.profile} component={Profile} />
       <Route path={Paths.register} component={Register} />
-      <Route path={Paths.homepage} exact component={HomePage} />
-      <Route path={Paths.signIn} exact component={SignIn} />
+      {/* <Route path={Paths.homepage} exact component={HomePage} /> */}
     </Switch>
   );
 };

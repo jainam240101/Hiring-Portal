@@ -40,6 +40,7 @@ export const getProfilePic = gql`
   query getProfilePic {
     getMe {
       profilePic
+      name
     }
   }
 `;

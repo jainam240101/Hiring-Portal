@@ -5,6 +5,10 @@ import classes from "./SignIn.module.css";
 import { Link } from "react-router-dom";
 import { useForm, onChangehandler } from "../../Hooks/useForm";
 import SignINSVG from "../../assets/SignIn.svg";
+import { SIGN_IN } from "./Mutations";
+import { useMutation } from "@apollo/client";
+import Cookie from "universal-cookie";
+const CookieService = new Cookie();
 const SignIn = () => {
   const [state, dispatch] = useReducer(useForm, {
     Name: "",
@@ -14,8 +18,22 @@ const SignIn = () => {
     Gender: "Male",
     Bio: "",
   });
+  const [signIn] = useMutation(SIGN_IN);
   const handleChange = (event) => {
     onChangehandler(dispatch, event.target.name, event.target.value);
+  };
+  const SubmitHandler = async (event) => {
+    event.preventDefault();
+    console.log("INN");
+    const { errors, data } = await signIn({
+      variables: { email: state.email, password: state.password },
+    });
+    console.log(errors);
+    console.log(data.signIn);
+    if (data.signIn.success) {
+      let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
+      CookieService.set("userSession", data.signIn.cookie, options);
+    }
   };
   return (
     <div className={classes.Container}>
@@ -26,7 +44,7 @@ const SignIn = () => {
         <div className={classes.fields}>
           <h1 className={classes.heading}>Welcome Back</h1>
           {/* <p className={classes.text}>Log-In to your Workplace</p> */}
-          <form className={classes.form}>
+          <form onSubmit={SubmitHandler} className={classes.form}>
             <input
               type={"text"}
               name='Email'
