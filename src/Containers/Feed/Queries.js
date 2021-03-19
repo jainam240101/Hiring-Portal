@@ -13,6 +13,7 @@ export const Queries = gql`
         likes
         description
         mediaLink
+        doesUserLike
         postedBy {
           id
           name
@@ -29,6 +30,7 @@ export const Queries = gql`
             name
             email
             gender
+            profilePic
           }
         }
       }

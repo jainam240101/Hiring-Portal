@@ -37,7 +37,7 @@ const Navbar = ({ showSideDrawer }) => {
         <GoSearch size={25} />
         <input placeholder={"Search"} className={classes.input} type={"text"} />
       </div>
-      <div className={classes.btnArea}>
+      {/* <div className={classes.btnArea}>
         <button onClick={buttonHandler} className={classes.btn}>
           Sign In
         </button>
@@ -47,7 +47,7 @@ const Navbar = ({ showSideDrawer }) => {
           <SignIn showSideDrawer={buttonHandler} />
           <Backdrop showSideDrawer={buttonHandler} />
         </Fragment>
-      ) : null}
+      ) : null} */}
       <div onClick={() => showSideDrawer(true)} className={classes.hamburger}>
         <div className={classes.lines}></div>
         <div className={classes.lines}></div>

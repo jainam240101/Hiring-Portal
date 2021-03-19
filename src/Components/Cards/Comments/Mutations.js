@@ -7,15 +7,30 @@ export const createCommentMutation = gql`
     createComment(input: { postId: $postId, comment: $comment }) {
       success
       message
+      error
+      data {
+        id
+      }
     }
   }
 `;
 
 export const createLikeMutation = gql`
-  mutation likePost($postId: String!) {
+  mutation likePost($postId: ID!) {
     likePost(input: { postId: $postId }) {
       success
       message
+      error
+    }
+  }
+`;
+
+export const createUnLikeMutation = gql`
+  mutation unLikePost($postId: ID!) {
+    unLikePost(input: { postId: $postId }) {
+      success
+      message
+      error
     }
   }
 `;

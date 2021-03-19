@@ -8,13 +8,13 @@ const Action = ({
   showLike = true,
   showComment = true,
   LikeHandler,
+  userLikes = false,
 }) => {
-  console.log(LikeHandler);
   return (
     <div className={classes.Container}>
       {showLike && (
         <div onClick={LikeHandler} className={classes.flex}>
-          <BiLike size={22} />
+          <BiLike size={22} style={{color:userLikes ? "blue" : "black"}} />
           <span className={classes.text}>Like</span>
         </div>
       )}

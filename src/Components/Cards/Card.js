@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useReducer, memo } from "react";
+import React, { useReducer, memo, useState } from "react";
 // import { BsThreeDots } from "react-icons/bs";
 // import { BiLike } from "react-icons/bi";
 import classes from "./card.module.css";
@@ -8,22 +8,31 @@ import Action from "./Action/Action";
 import Comments from "./Comments/Comments";
 import { useForm, onChangehandler } from "../../Hooks/useForm";
 import { useMutation } from "@apollo/client";
-import {
-  createCommentMutation,
-  createLikeMutation,
-} from "./Comments/Mutations";
+import { createCommentMutation } from "./Comments/Mutations";
+import ToggleLikeFeedPostHook from "./Hooks/toggleLike";
 
-const Card = ({ data }) => {
+const Card = ({ data, userData }) => {
   const [createComment] = useMutation(createCommentMutation);
-  const [likePost] = useMutation(createLikeMutation);
 
-  const { postedBy, description, likes, comments, mediaLink, id } = data;
+  const {
+    postedBy,
+    description,
+    likes,
+    comments,
+    mediaLink,
+    id,
+    doesUserLike,
+  } = data;
   const { name, profilePic, bio } = postedBy;
-  // console.log(postedBy);
-  console.log("render", id);
-  const time = "1d";
+  const [postComments, setPostComments] = useState([...comments]);
   const [state, dispatch] = useReducer(useForm, {
     Comment: "",
+  });
+  console.log("render", id);
+  const { totalLikes, error, toggleLike, userLikes } = ToggleLikeFeedPostHook({
+    id,
+    doesUserLike: doesUserLike || false,
+    likes,
   });
   const handleChange = (event) => {
     onChangehandler(dispatch, event.target.name, event.target.value);
@@ -35,19 +44,21 @@ const Card = ({ data }) => {
         comment: state.Comment,
       },
     });
+
+    const { id: commentId } = data.createComment.data;
+    setPostComments((prevComments) => {
+      const newComment = {
+        userData: userData,
+        comment: state.Comment,
+        id: commentId,
+      };
+      return [...prevComments, newComment];
+    });
     console.log(errors);
     console.log(data);
     state.Comment = "";
   };
-  const LikeHandler = async () => {
-    const { data, errors } = await likePost({
-      variables: {
-        postId: id,
-      },
-    });
-    console.log(errors);
-    console.log(data);
-  };
+
   return (
     <div className={classes.Container}>
       {/* <div className={classes.options}>
@@ -55,7 +66,7 @@ const Card = ({ data }) => {
       </div> */}
       <div className={classes.top}>
         <div>
-          <img src={profilePic} alt='ProfilePic' />
+          <img src={profilePic} alt="ProfilePic" />
         </div>
         <div className={classes.Name}>
           <div>{name}</div>
@@ -72,7 +83,7 @@ const Card = ({ data }) => {
               <img
                 style={{ height: "100%", width: "100%", objectFit: "contain" }}
                 src={mediaLink}
-                alt='ProfilePic'
+                alt="ProfilePic"
               />
             </div>
           )}
@@ -83,13 +94,18 @@ const Card = ({ data }) => {
               flexDirection: "row",
               flexGrow: 1,
               width: "100%",
-            }}>
-            <div className={classes.like}>{likes} likes</div>
+            }}
+          >
+            <div className={classes.like}>{totalLikes} likes</div>
             <div className={classes.comments}>
               {comments.length || 0} comments
             </div>
           </div>
-          <Action LikeHandler={LikeHandler} showShare={true} />
+          <Action
+            LikeHandler={toggleLike}
+            showShare={true}
+            userLikes={userLikes}
+          />
         </div>
       </div>
       <div className={classes.writeYourCommentContainer}>
@@ -97,34 +113,30 @@ const Card = ({ data }) => {
           type={"text"}
           value={state.Comment}
           onChange={handleChange}
-          name='Comment'
-          placeholder='Write a comment'
+          name="Comment"
+          placeholder="Write a comment"
           className={classes.inputBox}
         />
         <button onClick={submitHandler} className={classes.btn}>
           Submit
         </button>
       </div>
-      {/* <div className={classes.CommentsContainer}>
-        <Comments
-          profilePic={
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.qv5buD9HsOntZSvUXVesswHaE8%26pid%3DApi&f=1"
-          }
-          name={"John doe"}
-          time={"1d"}
-          comment={"Good Work!! Congrats"}
-        />
-      </div>
-      <div className={classes.CommentsContainer}>
-        <Comments
-          profilePic={
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.qv5buD9HsOntZSvUXVesswHaE8%26pid%3DApi&f=1"
-          }
-          name={"John doe"}
-          time={"1d"}
-          comment={"Good Work!! Congrats"}
-        />
-      </div> */}
+
+      {postComments?.length > 0 &&
+        postComments.map((item, index) => {
+          const { comment, id, userData } = item;
+          const { email, gender, id: userId, name, profilePic } = userData;
+          return (
+            <div className={classes.CommentsContainer}>
+              <Comments
+                profilePic={profilePic}
+                name={name}
+                comment={comment}
+                key={id}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 };

@@ -4,42 +4,47 @@ import React, { useReducer } from "react";
 import classes from "./SignIn.module.css";
 import { Link } from "react-router-dom";
 import { useForm, onChangehandler } from "../../Hooks/useForm";
+import { useHistory } from "react-router-dom";
 import SignINSVG from "../../assets/SignIn.svg";
 import { SIGN_IN } from "./Mutations";
 import { useMutation } from "@apollo/client";
 import Cookie from "universal-cookie";
+import Paths from "../../Constants/paths";
 const CookieService = new Cookie();
 const SignIn = () => {
+  const history = useHistory();
   const [state, dispatch] = useReducer(useForm, {
-    Name: "",
-    Email: "",
-    Password: "",
-    ConfirmPassword: "",
-    Gender: "Male",
-    Bio: "",
+    email: "",
+    password: "",
   });
   const [signIn] = useMutation(SIGN_IN);
   const handleChange = (event) => {
+    console.log(event.target.name, event.target.value);
     onChangehandler(dispatch, event.target.name, event.target.value);
   };
   const SubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("INN");
-    const { errors, data } = await signIn({
-      variables: { email: state.email, password: state.password },
-    });
-    console.log(errors);
-    console.log(data.signIn);
-    if (data.signIn.success) {
-      let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
-      CookieService.set("userSession", data.signIn.cookie, options);
+    try {
+      console.log("INN", state);
+      const { errors, data } = await signIn({
+        variables: { email: state.email, password: state.password },
+      });
+      console.log(errors);
+      console.log(data.signIn);
+      if (data.signIn.success) {
+        let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
+        CookieService.set("userSession", data.signIn.cookie, options);
+        history.push(Paths.feed);
+      }
+    } catch (err) {
+      console.log("erro", JSON.stringify(err, null, 2));
     }
   };
   return (
     <div className={classes.Container}>
       <div className={classes.box}>
         <div className={classes.imageBox}>
-          <img src={SignINSVG} alt='Sign IN' />
+          <img src={SignINSVG} alt="Sign IN" />
         </div>
         <div className={classes.fields}>
           <h1 className={classes.heading}>Welcome Back</h1>
@@ -47,7 +52,7 @@ const SignIn = () => {
           <form onSubmit={SubmitHandler} className={classes.form}>
             <input
               type={"text"}
-              name='Email'
+              name="email"
               className={classes.input}
               onChange={handleChange}
               placeholder={"Email"}
@@ -56,7 +61,7 @@ const SignIn = () => {
               placeholder={"Password"}
               value={state.Password}
               onChange={handleChange}
-              name='Password'
+              name="password"
               type={"password"}
               className={classes.input}
             />

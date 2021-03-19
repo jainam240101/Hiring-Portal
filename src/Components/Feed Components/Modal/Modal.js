@@ -8,7 +8,8 @@ import { BsCardImage } from "react-icons/bs";
 import { useForm, onChangehandler } from "../../../Hooks/useForm";
 import { createPostMutation } from "./Mutation";
 
-const Modal = ({ profilePic, name, modalHandler }) => {
+const Modal = ({ userData, addPost, modalHandler }) => {
+  let { profilePic, name } = userData;
   const [createPost] = useMutation(createPostMutation);
   const [state, dispatch] = useReducer(useForm, {
     description: "",
@@ -24,15 +25,38 @@ const Modal = ({ profilePic, name, modalHandler }) => {
   };
   const submitHandler = async () => {
     console.log(state);
-    const { data } = await createPost({
-      variables: {
-        postType: "Temp",
-        description: state.description,
-        mediaLink: state.mediaLink,
-      },
-    });
-    const { success, message, error } = data.createPost;
-    console.log(success, message, error);
+    try {
+      const { data } = await createPost({
+        variables: {
+          postType: "Temp",
+          description: state.description,
+          mediaLink: state.mediaLink,
+        },
+      });
+
+      const { success, message, error, data: postData } = data.createPost;
+      if (success) {
+        let { id, mediaLink } = postData;
+        let { description } = state;
+        let data = {
+          id,
+          postedBy: userData,
+          postType: "demo",
+          description,
+          mediaLink,
+          doesUserLike: false,
+          likes: 0,
+          comments: [],
+        };
+        addPost(data);
+        modalHandler();
+        console.log(data);
+      } else {
+        alert(error);
+      }
+    } catch (err) {
+      console.log("erro", JSON.stringify(err, null, 2));
+    }
   };
   const handleChange = (event) => {
     onChangehandler(dispatch, event.target.name, event.target.value);

@@ -13,9 +13,9 @@ import SignIn from "./Containers/Sign In/SignIn";
 import { cache } from ".";
 const App = () => {
   const { data, error } = useQuery(me);
-  console.log(error);
+ 
   if (data !== undefined) {
-    console.log(data.getMe);
+   
 
     cache.writeQuery({
       query: IS_LOGGED_IN,

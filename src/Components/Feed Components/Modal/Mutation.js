@@ -17,12 +17,8 @@ export const createPostMutation = gql`
       message
       error
       data {
-        postedBy {
-          name
-          email
-        }
-        postType
-        description
+        id
+        mediaLink
       }
     }
   }
