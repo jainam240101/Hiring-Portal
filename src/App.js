@@ -11,12 +11,11 @@ import { IS_LOGGED_IN, me } from "./Custom Queries/user";
 import Feed from "./Containers/Feed/Feed";
 import SignIn from "./Containers/Sign In/SignIn";
 import { cache } from ".";
+import Settings from "./Containers/User Settings/Settings";
 const App = () => {
   const { data, error } = useQuery(me);
- 
-  if (data !== undefined) {
-   
 
+  if (data !== undefined) {
     cache.writeQuery({
       query: IS_LOGGED_IN,
       data: {
@@ -33,10 +32,11 @@ const App = () => {
   }
   return (
     <Switch>
-      <Route path={Paths.signIn} exact component={SignIn} />
-      <Route path={Paths.homepage} component={Feed} />
       <Route path={Paths.profile} component={Profile} />
+      <Route path={Paths.signIn} component={SignIn} />
       <Route path={Paths.register} component={Register} />
+      <Route path={Paths.settings} component={Settings} />
+      <Route path={Paths.homepage} exact component={Feed} />
       {/* <Route path={Paths.homepage} exact component={HomePage} /> */}
     </Switch>
   );

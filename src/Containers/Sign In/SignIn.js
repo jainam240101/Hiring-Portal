@@ -53,8 +53,8 @@ const SignIn = () => {
             <input
               type={"text"}
               name="email"
-              className={classes.input}
               onChange={handleChange}
+              className={classes.input}
               placeholder={"Email"}
             />
             <input

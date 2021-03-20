@@ -1,18 +1,18 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./Skills.module.css";
 import Heading from "../../HomePage Components/Headings/Heading";
+import Chips from "./Chips/Chips";
 
 const Skill = ({ skills }) => {
   return (
     <div className={classes.Container}>
-      <Heading heading={"Skills"} />
       <div className={classes.skills}>
         {skills.map((element, index) => (
-          <div key={index} className={classes.text}>
+          <Chips key={index} className={classes.text}>
             {element}
-          </div>
+          </Chips>
         ))}
       </div>
     </div>

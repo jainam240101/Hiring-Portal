@@ -9,7 +9,6 @@ import Backdrop from "../../Components/Navbar/Backdrop/Backdrop";
 import { useLazyQuery } from "@apollo/client";
 import { getProfilePic, Queries } from "./Queries";
 import { cache } from "../../index";
-import { FaLess } from "react-icons/fa";
 
 const Feed = () => {
   const [modal, setmodal] = useState(false);

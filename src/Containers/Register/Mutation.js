@@ -1,3 +1,5 @@
+/** @format */
+
 import { gql } from "@apollo/client";
 
 export const RegisterHandler = gql`

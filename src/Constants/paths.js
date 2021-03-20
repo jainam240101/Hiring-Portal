@@ -6,6 +6,7 @@ const path = {
   feed: "/feed",
   profile: "/profile",
   signIn: "/signin",
+  settings: "/settings",
 };
 
 export default path;
