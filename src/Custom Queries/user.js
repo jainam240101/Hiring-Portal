@@ -13,7 +13,6 @@ export const IS_LOGGED_IN = gql`
       profilePic @client
       bio @client
       skills @client
-      userType @client
     }
   }
 `;
@@ -27,7 +26,6 @@ export const me = gql`
       email
       profilePic
       bio
-      userType
       skills
     }
   }

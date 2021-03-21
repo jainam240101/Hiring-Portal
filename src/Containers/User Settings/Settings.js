@@ -1,18 +1,19 @@
 /** @format */
 
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer } from "react";
 import { Link } from "react-router-dom";
 import { cache } from "../../index";
 import classes from "./Settings.module.css";
+import { useMutation } from "@apollo/client";
 import { useForm, onChangehandler } from "../../Hooks/useForm";
-import { getProfilePic } from "./Queries";
+import { getProfilePic, updateUserMutation } from "./Queries";
 import Chips from "../../Components/Dasboard Components/Skills/Chips/Chips";
 import { BsCardImage } from "react-icons/bs";
 
 const Settings = () => {
-  const [skills, setskills] = useState([]);
   const [newSkill, setnewSkill] = useState("");
   const [dispatched, setdispatched] = useState(false);
+  const [updateUser] = useMutation(updateUserMutation);
   const profiledata = cache.readQuery({
     query: getProfilePic,
   });
@@ -27,7 +28,12 @@ const Settings = () => {
   const submitSkill = (e) => {
     var keyCode = e.code || e.key;
     if (keyCode === "Enter") {
-      setskills([...skills, newSkill]);
+      dispatch({
+        type: "addNewSkill",
+        data: {
+          newSkill: newSkill,
+        },
+      });
       setnewSkill("");
     }
   };
@@ -35,9 +41,12 @@ const Settings = () => {
     onChangehandler(dispatch, event.target.name, event.target.value);
   };
   const removeSkill = (index) => {
-    const newSkills = [...skills];
-    newSkills.splice(index, 1);
-    setskills(newSkills);
+    dispatch({
+      type: "removeSkill",
+      data: {
+        index: index,
+      },
+    });
   };
   const uploadImage = (event) => {
     let files = event.target.files;
@@ -47,16 +56,26 @@ const Settings = () => {
       onChangehandler(dispatch, event.target.name, e.target.result);
     };
   };
-  const SubmitHandler = () => {
+  const SubmitHandler = async () => {
     if (state.Password === state.ConfirmPassword) {
-      console.log("Matched");
+      const { errors, data } = await updateUser({
+        variables: {
+          name: state.Name,
+          email: state.Email,
+          bio: state.Bio,
+          password: state.Password,
+          skills: state.skills,
+          profilePic: state.mediaLink,
+        },
+      });
+      console.log(errors);
+      console.log(data);
     } else {
       alert("Passords do not match");
     }
   };
   if (profiledata) {
     if (profiledata.error) return <div>Error!!!</div>;
-    console.log(state);
     if (!dispatched) {
       dispatch({
         type: "edituserInitialState",
@@ -64,6 +83,7 @@ const Settings = () => {
           Name: profiledata.getMe.name,
           Bio: profiledata.getMe.bio,
           Email: profiledata.getMe.email,
+          Skills: profiledata.getMe.skills,
         },
       });
       setdispatched(true);
@@ -122,16 +142,6 @@ const Settings = () => {
                   />
                 </div>
               </div>
-              <div className={classes.flex}>
-                <div className={classes.col}>
-                  <label className={classes.label}>Twitter</label>
-                  <input type={"text"} className={classes.input} name='Name' />
-                </div>
-                <div className={classes.col}>
-                  <label className={classes.label}>Instagram</label>
-                  <input name='Email' type={"text"} className={classes.input} />
-                </div>
-              </div>
               <label>Bio</label>
               <textarea
                 value={state.Bio}
@@ -150,11 +160,11 @@ const Settings = () => {
                 onKeyPress={submitSkill}
                 name='text'
                 type={"text"}
-                placeholder={"mark.cuban@gmail.com"}
+                placeholder={"Python, JavaScript, etc."}
                 className={classes.input}
               />
               <div className={classes.skills}>
-                {skills?.map((element, index) => (
+                {state.skills?.map((element, index) => (
                   <Chips
                     cross={true}
                     deleteHandler={removeSkill}
@@ -187,7 +197,7 @@ const Settings = () => {
               </div>
             </div>
           </div>
-          <button onSubmit={SubmitHandler} className={classes.submitBtn}>
+          <button onClick={SubmitHandler} className={classes.submitBtn}>
             Submit
           </button>
         </div>
