@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   createLikeMutation,
   createUnLikeMutation,
-} from "../Comments/Mutations";
+} from "../apollo/Mutations";
 import { useMutation } from "@apollo/client";
 const ToggleLikeFeedPostHook = ({ id, doesUserLike, likes }) => {
   const [targetId, setTargetId] = useState(id);

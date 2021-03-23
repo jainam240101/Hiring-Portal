@@ -38,11 +38,3 @@ export const Queries = gql`
   }
 `;
 
-export const getProfilePic = gql`
-  query getProfilePic {
-    getMe {
-      profilePic
-      name
-    }
-  }
-`;

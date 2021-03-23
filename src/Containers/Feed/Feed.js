@@ -7,7 +7,8 @@ import Card from "../../Components/Cards/Card";
 import Modal from "../../Components/Feed Components/Modal/Modal";
 import Backdrop from "../../Components/Navbar/Backdrop/Backdrop";
 import { useLazyQuery } from "@apollo/client";
-import { getProfilePic, Queries } from "./Queries";
+import { getProfileData } from "../../CommonQueries/userQuery";
+import {  Queries } from "./apollo/Queries";
 import { cache } from "../../index";
 
 const Feed = () => {
@@ -18,12 +19,12 @@ const Feed = () => {
     variables: { pageNo: 0 },
   });
   const profiledata = cache.readQuery({
-    query: getProfilePic,
+    query: getProfileData,
   });
 
   useEffect(() => {
     if (data) {
-      console.log(data.getPosts.data);
+     
       setFeedData((prevData) => {
         return [...prevData, ...data?.getPosts?.data];
       });
@@ -54,7 +55,7 @@ const Feed = () => {
     <Page>
       <div className={classes.newPost}>
         <div className={classes.images}>
-          <img src={profiledata?.getMe.profilePic} alt="ProfilePic" />
+          <img src={profiledata?.getMe.profilePic} alt="ProfilePic"  style={{objectFit:'contain'}}/>
         </div>
         <div className={classes.input}>
           <div className={classes.inputBox} onClick={modalHandler}>

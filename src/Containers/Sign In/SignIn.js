@@ -3,10 +3,10 @@
 import React, { useReducer } from "react";
 import classes from "./SignIn.module.css";
 import { Link } from "react-router-dom";
-import { useForm, onChangehandler } from "../../Hooks/useForm";
+import { useForm, CHANGE } from "../../Hooks/useForm";
 import { useHistory } from "react-router-dom";
 import SignINSVG from "../../assets/SignIn.svg";
-import { SIGN_IN } from "./Mutations";
+import { SIGN_IN } from "./apollo/Mutations";
 import { useMutation } from "@apollo/client";
 import Cookie from "universal-cookie";
 import Paths from "../../Constants/paths";
@@ -20,7 +20,13 @@ const SignIn = () => {
   const [signIn] = useMutation(SIGN_IN);
   const handleChange = (event) => {
     console.log(event.target.name, event.target.value);
-    onChangehandler(dispatch, event.target.name, event.target.value);
+    dispatch({
+      type: CHANGE,
+      data: {
+        key: event.target.name,
+        value: event.target.value,
+      },
+    });
   };
   const SubmitHandler = async (event) => {
     event.preventDefault();

@@ -58,6 +58,7 @@
 }
 .image {
   border-radius: 50%;
+  object-fit: contain;
 }
 .image {
   height: 150px;

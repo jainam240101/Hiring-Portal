@@ -6,9 +6,9 @@ import React, { useReducer, memo, useState } from "react";
 import classes from "./card.module.css";
 import Action from "./Action/Action";
 import Comments from "./Comments/Comments";
-import { useForm, onChangehandler } from "../../Hooks/useForm";
+import { useForm, CHANGE } from "../../Hooks/useForm";
 import { useMutation } from "@apollo/client";
-import { createCommentMutation } from "./Comments/Mutations";
+import { createCommentMutation } from "./apollo/Mutations";
 import ToggleLikeFeedPostHook from "./Hooks/toggleLike";
 
 const Card = ({ data, userData }) => {
@@ -35,7 +35,13 @@ const Card = ({ data, userData }) => {
     likes,
   });
   const handleChange = (event) => {
-    onChangehandler(dispatch, event.target.name, event.target.value);
+    dispatch({
+      type: CHANGE,
+      data: {
+        key: event.target.name,
+        value: event.target.value,
+      },
+    });
   };
   const submitHandler = async () => {
     const { data, errors } = await createComment({
@@ -66,7 +72,11 @@ const Card = ({ data, userData }) => {
       </div> */}
       <div className={classes.top}>
         <div>
-          <img src={profilePic} alt="ProfilePic" />
+          <img
+            src={profilePic}
+            alt="ProfilePic"
+            style={{ objectFit: "contain" }}
+          />
         </div>
         <div className={classes.Name}>
           <div>{name}</div>

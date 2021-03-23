@@ -38,10 +38,10 @@ const App = () => {
   return (
     <Switch>
       <Route path={Paths.profile} component={Profile} />
-      <Route path={Paths.signIn} component={SignIn} />
-      <Route path={Paths.register} component={Register} />
-      <Route path={Paths.settings} component={Settings} />
-      <Route path={Paths.homepage} exact component={Feed} />
+      <Route path={Paths.signIn} exact component={SignIn} />
+      <Route path={Paths.register} exact component={Register} />
+      <Route path={Paths.settings} exact component={Settings} />
+      <Route path={Paths.feed} exact component={Feed} />
       {/* <Route path={Paths.homepage} exact component={HomePage} /> */}
     </Switch>
   );

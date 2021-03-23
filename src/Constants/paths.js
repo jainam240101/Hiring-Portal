@@ -4,9 +4,13 @@ const path = {
   homepage: "/",
   register: "/register",
   feed: "/feed",
-  profile: "/profile",
+  profile: "/profile/:userId",
+  createProfilePath: (id) => {
+    return `/profile/${id}`;
+  },
   signIn: "/signin",
   settings: "/settings",
+  temp: "/Temp",
 };
 
 export default path;

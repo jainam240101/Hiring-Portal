@@ -11,17 +11,17 @@ const Contact = () => {
       <div className={classes.heading}>Social handles :</div>
       <div className={classes.socials}>
         <div className={classes.box}>
-          <a target='_blank' href='https://discord.gg/XA8Qu9GPyV'>
+          <a target="_blank" href="https://discord.gg/XA8Qu9GPyV">
             <FiTwitter color={"#0984e3"} size={30} />
           </a>
         </div>
         <div className={classes.box}>
-          <a target='_blank' href='https://instagram.com/hackbash'>
+          <a target="_blank" href="https://instagram.com/hackbash">
             <FaInstagram color={"#C7008A"} size={30} />
           </a>
         </div>
         <div className={classes.box}>
-          <a target='_blank' href='https://instagram.com/hackbash'>
+          <a target="_blank" href="https://instagram.com/hackbash">
             <FiMail color={"#eb4d4b"} size={30} />
           </a>
         </div>

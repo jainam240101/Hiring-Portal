@@ -4,10 +4,16 @@ import React, { useReducer } from "react";
 import classes from "./Register.module.css";
 import RegisterSVG from "../../assets/Register.svg";
 import { useMutation } from "@apollo/client";
-import { RegisterHandler } from "./Mutation";
-import { useForm, onChangehandler } from "../../Hooks/useForm";
+import { RegisterHandler } from "./apollo/Mutation";
+import { useForm, CHANGE } from "../../Hooks/useForm";
+import { useHistory } from "react-router-dom";
+import Cookie from "universal-cookie";
+import Paths from "../../Constants/paths";
+
+const CookieService = new Cookie();
 
 const Register = () => {
+  const history = useHistory();
   const [signUp] = useMutation(RegisterHandler);
   const [state, dispatch] = useReducer(useForm, {
     Name: "",
@@ -20,7 +26,7 @@ const Register = () => {
   const SubmitHandler = async () => {
     if (state.Password === state.ConfirmPassword) {
       console.log(state);
-      const { errors, data } = await signUp({
+      const { errors, data, } = await signUp({
         variables: {
           name: state.Name,
           email: state.Email,
@@ -29,6 +35,14 @@ const Register = () => {
           bio: state.Bio,
         },
       });
+      const { success, message, cookie, error } = data.signUp;
+      if (success) {
+        let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
+        CookieService.set("userSession", cookie, options);
+        history.push(Paths.feed);
+      } else {
+        alert(error);
+      }
       console.log(errors);
       console.log(data);
     } else {
@@ -37,7 +51,13 @@ const Register = () => {
   };
 
   const handleChange = (event) => {
-    onChangehandler(dispatch, event.target.name, event.target.value);
+    dispatch({
+      type: CHANGE,
+      data: {
+        key: event.target.name,
+        value: event.target.value,
+      },
+    });
   };
   return (
     <div className={classes.background}>
@@ -104,13 +124,7 @@ const Register = () => {
             <label>Gender</label>
             <select
               name="Gender"
-              onChange={(event) => {
-                onChangehandler(
-                  dispatch,
-                  event.target.name,
-                  event.target.value
-                );
-              }}
+              onChange={handleChange}
               className={classes.select}
             >
               <option disabled={"true"}>Select</option>

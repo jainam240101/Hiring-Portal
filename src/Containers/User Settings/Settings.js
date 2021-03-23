@@ -5,8 +5,15 @@ import { Link } from "react-router-dom";
 import { cache } from "../../index";
 import classes from "./Settings.module.css";
 import { useMutation } from "@apollo/client";
-import { useForm, onChangehandler } from "../../Hooks/useForm";
-import { getProfilePic, updateUserMutation } from "./Queries";
+import {
+  useForm,
+  CHANGE,
+  EDITUSERINITIALSTATE,
+  PUSHARRAY,
+  POPWITHINDEXARRAY,
+} from "../../Hooks/useForm";
+import { getProfileData } from "../../CommonQueries/userQuery";
+import { updateUserMutation } from "./Queries";
 import Chips from "../../Components/Dasboard Components/Skills/Chips/Chips";
 import { BsCardImage } from "react-icons/bs";
 
@@ -15,36 +22,47 @@ const Settings = () => {
   const [dispatched, setdispatched] = useState(false);
   const [updateUser] = useMutation(updateUserMutation);
   const profiledata = cache.readQuery({
-    query: getProfilePic,
+    query: getProfileData,
   });
+
   const [state, dispatch] = useReducer(useForm, {
     Name: "",
     Email: "",
     Password: "",
     ConfirmPassword: "",
     Bio: "",
-    mediaLink: "",
+    profilePic: "",
+    skills: [],
   });
+
   const submitSkill = (e) => {
     var keyCode = e.code || e.key;
     if (keyCode === "Enter") {
       dispatch({
-        type: "addNewSkill",
+        type: PUSHARRAY,
         data: {
-          newSkill: newSkill,
+          key: "skills",
+          value: newSkill,
         },
       });
       setnewSkill("");
     }
   };
   const handleChange = (event) => {
-    onChangehandler(dispatch, event.target.name, event.target.value);
-  };
-  const removeSkill = (index) => {
     dispatch({
-      type: "removeSkill",
+      type: CHANGE,
+      data: {
+        key: event.target.name,
+        value: event.target.value,
+      },
+    });
+  };
+  const popWithIndexArray = (index) => {
+    dispatch({
+      type: POPWITHINDEXARRAY,
       data: {
         index: index,
+        key: "skills",
       },
     });
   };
@@ -53,7 +71,13 @@ const Settings = () => {
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (e) => {
-      onChangehandler(dispatch, event.target.name, e.target.result);
+      dispatch({
+        type: CHANGE,
+        data: {
+          key: event.target.name,
+          value: e.target.result,
+        },
+      });
     };
   };
   const SubmitHandler = async () => {
@@ -77,21 +101,24 @@ const Settings = () => {
   if (profiledata) {
     if (profiledata.error) return <div>Error!!!</div>;
     if (!dispatched) {
+      console.log(profiledata.getMe);
       dispatch({
-        type: "edituserInitialState",
+        type: EDITUSERINITIALSTATE,
         values: {
           Name: profiledata.getMe.name,
           Bio: profiledata.getMe.bio,
           Email: profiledata.getMe.email,
-          Skills: profiledata.getMe.skills,
+          skills: [...profiledata.getMe.skills],
+          profilePic: profiledata.getMe.profilePic,
         },
       });
       setdispatched(true);
     }
+
     return (
       <div className={classes.Container}>
         <div className={classes.nav}>
-          <Link to='/profile'>Back to Profile</Link>
+          <Link to="/profile">Back to Profile</Link>
         </div>
         <div className={classes.topContainer}>
           <div className={classes.heading}>Update Basic Details</div>
@@ -107,14 +134,14 @@ const Settings = () => {
                     type={"text"}
                     value={state.Name}
                     onChange={handleChange}
-                    name='Name'
+                    name="Name"
                     className={classes.input}
                   />
                 </div>
                 <div className={classes.col}>
                   <label className={classes.label}>Email</label>
                   <input
-                    name='Email'
+                    name="Email"
                     onChange={handleChange}
                     value={state.Email}
                     type={"email"}
@@ -128,7 +155,7 @@ const Settings = () => {
                   <input
                     type={"password"}
                     className={classes.input}
-                    name='Password'
+                    name="Password"
                     onChange={handleChange}
                   />
                 </div>
@@ -136,7 +163,7 @@ const Settings = () => {
                   <label className={classes.label}>Confirm Password</label>
                   <input
                     onChange={handleChange}
-                    name='ConfirmPassword'
+                    name="ConfirmPassword"
                     type={"password"}
                     className={classes.input}
                   />
@@ -146,8 +173,8 @@ const Settings = () => {
               <textarea
                 value={state.Bio}
                 onChange={handleChange}
-                name='Bio'
-                type='text'
+                name="Bio"
+                type="text"
                 className={classes.textArea}
               />
               <br />
@@ -158,7 +185,7 @@ const Settings = () => {
                   setnewSkill(e.target.value);
                 }}
                 onKeyPress={submitSkill}
-                name='text'
+                name="text"
                 type={"text"}
                 placeholder={"Python, JavaScript, etc."}
                 className={classes.input}
@@ -167,9 +194,10 @@ const Settings = () => {
                 {state.skills?.map((element, index) => (
                   <Chips
                     cross={true}
-                    deleteHandler={removeSkill}
+                    deleteHandler={popWithIndexArray}
                     value={index}
-                    key={index}>
+                    key={index}
+                  >
                     {element}
                   </Chips>
                 ))}
@@ -178,19 +206,19 @@ const Settings = () => {
             <div>
               <img
                 className={classes.image}
-                src={profiledata?.getMe.profilePic}
-                alt='Joe Rogan'
+                src={state.profilePic}
+                alt="Joe Rogan"
               />
               <div className={classes.updateBtn}>
                 <input
-                  name='mediaLink'
+                  name="profilePic"
                   style={{ display: "none" }}
-                  type='file'
-                  id='icon-button-file'
-                  accept='image/*'
+                  type="file"
+                  id="icon-button-file"
+                  accept="image/*"
                   onChange={uploadImage}
                 />
-                <label htmlFor='icon-button-file'>
+                <label htmlFor="icon-button-file">
                   <BsCardImage className={classes.logo} size={20} />{" "}
                   <label>Upload New Image</label>
                 </label>

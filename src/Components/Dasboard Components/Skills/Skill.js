@@ -10,9 +10,11 @@ const Skill = ({ skills }) => {
     <div className={classes.Container}>
       <div className={classes.skills}>
         {skills.map((element, index) => (
-          <Chips key={index} className={classes.text}>
-            {element}
-          </Chips>
+          <div className={classes.chipWrapper}>
+            <Chips key={index} className={classes.text}>
+              {element}
+            </Chips>
+          </div>
         ))}
       </div>
     </div>

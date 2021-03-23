@@ -21,6 +21,8 @@ export const RegisterHandler = gql`
     ) {
       success
       message
+      cookie
+      error
       data {
         name
         email

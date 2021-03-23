@@ -6,20 +6,35 @@ import Contact from "../Contact/Contact";
 import { Link } from "react-router-dom";
 import JoeRogan from "../../../assets/joeRogan.jpg";
 
-const Header = ({ description, name }) => {
+const Header = ({ userData }) => {
+  const {
+    bio,
+    email,
+    gender,
+    id,
+    name,
+    profilePic,
+    skills,
+    totalFollowers,
+    totalFollowing,
+    userType,
+  } = userData;
   return (
     <div className={classes.flex}>
-      <div className={classes.topInfo}>
-        <img src={JoeRogan} alt='Profile Pic' />
+      <div>
+        <img src={profilePic} alt="Profile Pic" className={classes.img} />
       </div>
       <div className={classes.Container}>
         <div className={classes.Heading}>{name}</div>
-        <div className={classes.Description}>{description}</div>
-        <Contact />
+        <div className={classes.Description}>{bio}</div>
         <div className={classes.connection}>
-          Total Connections :{" "}
-          <span className={classes.Link}>
-            <Link href='/connections'>147</Link>
+          <span>
+            Total Followers :{" "}
+            <span className={classes.Link}>{totalFollowers}</span>
+          </span>
+          <span>
+            Total Following :{" "}
+            <span className={classes.Link}>{totalFollowing}</span>
           </span>
         </div>
       </div>

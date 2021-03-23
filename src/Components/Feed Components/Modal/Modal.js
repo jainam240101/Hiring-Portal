@@ -5,8 +5,8 @@ import classes from "./Modal.module.css";
 import { useMutation } from "@apollo/client";
 import { ImCross } from "react-icons/im";
 import { BsCardImage } from "react-icons/bs";
-import { useForm, onChangehandler } from "../../../Hooks/useForm";
-import { createPostMutation } from "./Mutation";
+import { useForm, CHANGE } from "../../../Hooks/useForm";
+import { createPostMutation } from "../apollo/Mutation";
 
 const Modal = ({ userData, addPost, modalHandler }) => {
   let { profilePic, name } = userData;
@@ -20,7 +20,13 @@ const Modal = ({ userData, addPost, modalHandler }) => {
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (e) => {
-      onChangehandler(dispatch, event.target.name, e.target.result);
+      dispatch({
+        type: CHANGE,
+        data: {
+          key: event.target.name,
+          value: e.target.result,
+        },
+      });
     };
   };
   const submitHandler = async () => {
@@ -59,7 +65,13 @@ const Modal = ({ userData, addPost, modalHandler }) => {
     }
   };
   const handleChange = (event) => {
-    onChangehandler(dispatch, event.target.name, event.target.value);
+    dispatch({
+      type: CHANGE,
+      data: {
+        key: event.target.name,
+        value: event.target.value,
+      },
+    });
   };
   return (
     <div className={classes.Container}>

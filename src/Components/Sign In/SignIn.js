@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ImCross } from "react-icons/im";
 import classes from "./SignIn.module.css";
-import { SIGN_IN } from "./Mutations";
-import { useForm, onChangehandler } from "../../Hooks/useForm";
+import { SIGN_IN } from "./apollo/Mutations";
+import { useForm, CHANGE } from "../../Hooks/useForm";
 import Cookie from "universal-cookie";
 const CookieService = new Cookie();
 const SignIn = ({ showSideDrawer }) => {
@@ -16,12 +16,20 @@ const SignIn = ({ showSideDrawer }) => {
     const { errors, data } = await signIn({
       variables: { email: state.email, password: state.password },
     });
-    console.log(errors);
-    console.log(data.signIn);
+
     if (data.signIn.success) {
       let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
       CookieService.set("userSession", data.signIn.cookie, options);
     }
+  };
+  const HandleChange = (event) => {
+    dispatch({
+      type: CHANGE,
+      data: {
+        key: event.target.name,
+        value: event.target.value,
+      },
+    });
   };
   return (
     <div className={classes.Container}>
@@ -37,15 +45,11 @@ const SignIn = ({ showSideDrawer }) => {
           type={"email"}
           value={state.email}
           placeholder={"Email"}
-          onChange={(event) => {
-            onChangehandler(dispatch, event.target.name, event.target.value);
-          }}
+          onChange={HandleChange}
         />
         <p className={classes.text}>Password</p>
         <input
-          onChange={(event) => {
-            onChangehandler(dispatch, event.target.name, event.target.value);
-          }}
+          onChange={HandleChange}
           name="password"
           value={state.password}
           className={classes.input}

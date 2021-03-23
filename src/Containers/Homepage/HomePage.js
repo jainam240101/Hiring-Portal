@@ -3,7 +3,7 @@
 import Page from "../../HOC/Page";
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { Hello } from "./Queries";
+import { Hello } from "./apollo/Queries";
 
 const HomePage = () => {
   const { loading, data, error } = useQuery(Hello);

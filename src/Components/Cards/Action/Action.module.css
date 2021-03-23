@@ -12,6 +12,7 @@
 }
 .text {
   margin-left: 4px;
+  user-select: none
 }
 
 .flex:hover{
