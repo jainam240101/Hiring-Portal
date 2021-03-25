@@ -3,15 +3,15 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Paths from "./Constants/paths";
-import HomePage from "./Containers/Homepage/HomePage";
-import Register from "./Containers/Register/Register";
-import Profile from "./Containers/Profile/Profile";
+import HomePage from "./Pages/Homepage/HomePage";
+import Register from "./Pages/Register/Register";
+import Profile from "./Pages/Profile/Profile";
 import { useQuery } from "@apollo/client";
 import { IS_LOGGED_IN, me } from "./Custom Queries/user";
-import Feed from "./Containers/Feed/Feed";
-import SignIn from "./Containers/Sign In/SignIn";
+import Feed from "./Pages/Feed/Feed";
+import SignIn from "./Pages/Sign In/SignIn";
 import { cache } from ".";
-import Settings from "./Containers/User Settings/Settings";
+import Settings from "./Pages/User Settings/Settings";
 const App = () => {
   const { data, error } = useQuery(me);
   try {

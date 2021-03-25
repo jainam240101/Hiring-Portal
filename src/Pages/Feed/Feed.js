@@ -7,8 +7,8 @@ import Card from "../../Components/Cards/Card";
 import Modal from "../../Components/Feed Components/Modal/Modal";
 import Backdrop from "../../Components/Navbar/Backdrop/Backdrop";
 import { useLazyQuery } from "@apollo/client";
-import { getProfileData } from "../../CommonQueries/userQuery";
-import {  Queries } from "./apollo/Queries";
+import { getProfileData } from "../../commonApollo/Queries/userQuery";
+import { Queries } from "./apollo/Queries";
 import { cache } from "../../index";
 
 const Feed = () => {
@@ -24,14 +24,18 @@ const Feed = () => {
 
   useEffect(() => {
     if (data) {
-     
+      const { data: postData } = data?.getPosts;
+      console.log(postData)
+      console.log("error", JSON.stringify(error, null, 2));
+
       setFeedData((prevData) => {
-        return [...prevData, ...data?.getPosts?.data];
+        return [...prevData, ...postData];
       });
     }
   }, [data]);
   useEffect(() => {
     if (error) {
+      console.log("error", JSON.stringify(error, null, 2));
       alert(error);
     }
   }, [error]);
@@ -55,7 +59,11 @@ const Feed = () => {
     <Page>
       <div className={classes.newPost}>
         <div className={classes.images}>
-          <img src={profiledata?.getMe.profilePic} alt="ProfilePic"  style={{objectFit:'contain'}}/>
+          <img
+            src={profiledata?.getMe.profilePic}
+            alt="ProfilePic"
+            style={{ objectFit: "contain" }}
+          />
         </div>
         <div className={classes.input}>
           <div className={classes.inputBox} onClick={modalHandler}>

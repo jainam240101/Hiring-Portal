@@ -3,15 +3,17 @@
 import React, { useEffect, useState } from "react";
 import Page from "../../HOC/Page";
 import classes from "./Profile.module.css";
-import Header from "../../Components/Dasboard Components/Header/Header";
-import Skill from "../../Components/Dasboard Components/Skills/Skill";
-import { useParams } from "react-router-dom";
-import Experience from "../../Components/Dasboard Components/Experience/Experience";
+import Header from "../../Components/Profile Components/Header/Header";
+import Skill from "../../Components/Profile Components/Skills/Skill";
+import { useParams, useHistory } from "react-router-dom";
+import Experience from "../../Components/Profile Components/Experience/Experience";
 import Heading from "../../Components/HomePage Components/Headings/Heading";
-import Education from "../../Components/Dasboard Components/Education/Education";
+import Education from "../../Components/Profile Components/Education/Education";
 import { useLazyQuery } from "@apollo/client";
 import { getUserQuery } from "./apollo/Queries";
+import path from "../../Constants/paths";
 const Profile = () => {
+  const history = useHistory();
   const [userData, setUserData] = useState({});
   const [userRelation, setUserRelation] = useState({});
   let [getUser, { loading, data, error }] = useLazyQuery(getUserQuery, {
@@ -32,6 +34,7 @@ const Profile = () => {
         setUserRelation({ ...userRelation });
       } else {
         alert(error);
+        history.push(path.feed);
       }
     }
   }, [data]);
@@ -39,20 +42,20 @@ const Profile = () => {
     console.log("erro", JSON.stringify(error, null, 2));
   }, [error]);
   if (loading) return <div>loading</div>;
-  console.log(userData);
+
   return (
     <Page>
       <div className={classes.Padding}>
-        <Header
-          userData={userData}
-          name={"Joe Rogan"}
-          description={
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
-          }
-        />
+      {/*Object.keys(userData).length this ensures that component is rendered only after state is mutated
+      * */}
+        {Object.keys(userData).length !== 0 &&
+          Object.keys(userRelation).length !== 0 && (
+            <Header userData={userData} userRelation={userRelation} />
+          )}
         {userData?.skills?.length > 0 && (
           <>
-            <Heading heading={"Skills"} /> <Skill skills={userData?.skills} />
+            <h1 style={{ marginLeft: "1%" }}>Skills</h1>
+            <Skill skills={userData?.skills} />
           </>
         )}
       </div>

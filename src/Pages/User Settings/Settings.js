@@ -11,10 +11,10 @@ import {
   EDITUSERINITIALSTATE,
   PUSHARRAY,
   POPWITHINDEXARRAY,
-} from "../../Hooks/useForm";
-import { getProfileData } from "../../CommonQueries/userQuery";
-import { updateUserMutation } from "./Queries";
-import Chips from "../../Components/Dasboard Components/Skills/Chips/Chips";
+} from "../../Hooks/formHooks/useForm";
+import { getProfileData } from "../../commonApollo/Queries/userQuery";
+import { updateUserMutation } from "./apollo/Queries";
+import Chips from "../../Components/Profile Components/Skills/Chips/Chips";
 import { BsCardImage } from "react-icons/bs";
 
 const Settings = () => {
@@ -192,14 +192,16 @@ const Settings = () => {
               />
               <div className={classes.skills}>
                 {state.skills?.map((element, index) => (
-                  <Chips
-                    cross={true}
-                    deleteHandler={popWithIndexArray}
-                    value={index}
-                    key={index}
-                  >
-                    {element}
-                  </Chips>
+                  <div style={{marginBottom:'1%',marginRight:'2%'}}>
+                    <Chips
+                      cross={true}
+                      deleteHandler={popWithIndexArray}
+                      value={index}
+                      key={index}
+                    >
+                      {element}
+                    </Chips>
+                  </div>
                 ))}
               </div>
             </div>

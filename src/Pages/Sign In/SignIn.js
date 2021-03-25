@@ -3,7 +3,7 @@
 import React, { useReducer } from "react";
 import classes from "./SignIn.module.css";
 import { Link } from "react-router-dom";
-import { useForm, CHANGE } from "../../Hooks/useForm";
+import { useForm, CHANGE } from "../../Hooks/formHooks/useForm";
 import { useHistory } from "react-router-dom";
 import SignINSVG from "../../assets/SignIn.svg";
 import { SIGN_IN } from "./apollo/Mutations";
@@ -38,8 +38,8 @@ const SignIn = () => {
       console.log(errors);
       console.log(data.signIn);
       if (data.signIn.success) {
-        let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
-        CookieService.set("userSession", data.signIn.cookie, options);
+        // let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
+        // CookieService.set("userSession", data.signIn.cookie, options);
         history.push(Paths.feed);
       }
     } catch (err) {

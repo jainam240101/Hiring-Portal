@@ -5,7 +5,7 @@ import classes from "./Modal.module.css";
 import { useMutation } from "@apollo/client";
 import { ImCross } from "react-icons/im";
 import { BsCardImage } from "react-icons/bs";
-import { useForm, CHANGE } from "../../../Hooks/useForm";
+import { useForm, CHANGE } from "../../../Hooks/formHooks/useForm";
 import { createPostMutation } from "../apollo/Mutation";
 
 const Modal = ({ userData, addPost, modalHandler }) => {

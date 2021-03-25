@@ -4,7 +4,7 @@ import classes from "./SideDrawer.module.css";
 import React, { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { cache } from "../../../index";
-import { getProfileData } from "../../../CommonQueries/userQuery";
+import { getProfileData } from "../../../commonApollo/Queries/userQuery";
 import navBar from "../Constants/navBarList";
 
 const SideDrawer = () => {
@@ -14,14 +14,14 @@ const SideDrawer = () => {
     setstate(`/${router.location.pathname.split("/")[1]}`);
   }, []);
   const onClickHandler = (value) => {
-    console.log(value);
+
     router.push(value);
   };
   const profiledata = cache.readQuery({
     query: getProfileData,
   });
 
-  console.log(profiledata?.getMe.id);
+
   return (
     <div className={classes.Container}>
       <h1 className={classes.heading}>Talent Hunt</h1>

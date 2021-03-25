@@ -5,7 +5,7 @@ import classes from "./Register.module.css";
 import RegisterSVG from "../../assets/Register.svg";
 import { useMutation } from "@apollo/client";
 import { RegisterHandler } from "./apollo/Mutation";
-import { useForm, CHANGE } from "../../Hooks/useForm";
+import { useForm, CHANGE } from "../../Hooks/formHooks/useForm";
 import { useHistory } from "react-router-dom";
 import Cookie from "universal-cookie";
 import Paths from "../../Constants/paths";
@@ -25,7 +25,7 @@ const Register = () => {
   });
   const SubmitHandler = async () => {
     if (state.Password === state.ConfirmPassword) {
-      console.log(state);
+    
       const { errors, data, } = await signUp({
         variables: {
           name: state.Name,

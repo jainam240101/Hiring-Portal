@@ -6,7 +6,7 @@ import React, { useReducer, memo, useState } from "react";
 import classes from "./card.module.css";
 import Action from "./Action/Action";
 import Comments from "./Comments/Comments";
-import { useForm, CHANGE } from "../../Hooks/useForm";
+import { useForm, CHANGE } from "../../Hooks/formHooks/useForm";
 import { useMutation } from "@apollo/client";
 import { createCommentMutation } from "./apollo/Mutations";
 import ToggleLikeFeedPostHook from "./Hooks/toggleLike";
@@ -28,7 +28,7 @@ const Card = ({ data, userData }) => {
   const [state, dispatch] = useReducer(useForm, {
     Comment: "",
   });
-  console.log("render", id);
+
   const { totalLikes, error, toggleLike, userLikes } = ToggleLikeFeedPostHook({
     id,
     doesUserLike: doesUserLike || false,
@@ -79,7 +79,7 @@ const Card = ({ data, userData }) => {
           />
         </div>
         <div className={classes.Name}>
-          <div>{name}</div>
+          <h3>{name}</h3>
           {/* <div className={classes.time}>{bio}</div> */}
         </div>
       </div>
