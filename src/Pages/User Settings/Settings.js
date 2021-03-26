@@ -108,7 +108,10 @@ const Settings = () => {
           Name: profiledata.getMe.name,
           Bio: profiledata.getMe.bio,
           Email: profiledata.getMe.email,
-          skills: [...profiledata.getMe.skills],
+          skills:
+            profiledata?.getMe?.skills?.length > 0
+              ? [...profiledata.getMe.skills]
+              : [],
           profilePic: profiledata.getMe.profilePic,
         },
       });
@@ -192,7 +195,7 @@ const Settings = () => {
               />
               <div className={classes.skills}>
                 {state.skills?.map((element, index) => (
-                  <div style={{marginBottom:'1%',marginRight:'2%'}}>
+                  <div style={{ marginBottom: "1%", marginRight: "2%" }}>
                     <Chips
                       cross={true}
                       deleteHandler={popWithIndexArray}

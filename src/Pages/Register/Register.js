@@ -37,8 +37,8 @@ const Register = () => {
       });
       const { success, message, cookie, error } = data.signUp;
       if (success) {
-        let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
-        CookieService.set("userSession", cookie, options);
+        // let options = { maxAge: 14 * 24 * 60 * 60 * 1000, path: "/" };
+        // CookieService.set("userSession", cookie, options);
         history.push(Paths.feed);
       } else {
         alert(error);
