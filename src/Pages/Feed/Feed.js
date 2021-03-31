@@ -4,8 +4,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import Page from "../../HOC/Page";
 import classes from "./Feed.module.css";
 import Card from "../../Components/Cards/Card";
-import Modal from "../../Components/Feed Components/Modal/Modal";
-import Backdrop from "../../Components/Navbar/Backdrop/Backdrop";
+import Modal from "../../Components/Modal/Modal";
+import AddPostModalBody from "../../Components/Feed Components/AddPostModalBody/AddPostModalBody";
+
 import { useLazyQuery } from "@apollo/client";
 import { getProfileData } from "../../commonApollo/Queries/userQuery";
 import { Queries } from "./apollo/Queries";
@@ -14,7 +15,7 @@ import { cache } from "../../index";
 const Feed = () => {
   const [modal, setmodal] = useState(false);
   const [feedData, setFeedData] = useState([]);
-  const [check, setCheck] = useState(1);
+
   const [getPost, { loading, data, error, fetchMore }] = useLazyQuery(Queries, {
     variables: { pageNo: 0 },
   });
@@ -25,7 +26,7 @@ const Feed = () => {
   useEffect(() => {
     if (data) {
       const { data: postData } = data?.getPosts;
-      console.log(postData)
+      console.log(postData);
       console.log("error", JSON.stringify(error, null, 2));
 
       setFeedData((prevData) => {
@@ -57,41 +58,57 @@ const Feed = () => {
   // if (error) return <p>Error :</p>;
   return (
     <Page>
-      <div className={classes.newPost}>
-        <div className={classes.images}>
-          <img
-            src={profiledata?.getMe.profilePic}
-            alt="ProfilePic"
-            style={{ objectFit: "contain" }}
-          />
-        </div>
-        <div className={classes.input}>
-          <div className={classes.inputBox} onClick={modalHandler}>
-            Create new post
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flex: 1,
+          flexDirection: "column",
+          padding:'0% 15%',
+        }}
+      >
+        <div className={classes.newPost}>
+          <div className={classes.images}>
+            <img
+              src={profiledata?.getMe.profilePic}
+              alt="ProfilePic"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.inputBox} onClick={modalHandler}>
+              Create new post
+            </div>
           </div>
         </div>
+       
+          {!loading && feedData.length > 0 && (
+            <>
+              {feedData.map((item, index) => {
+                return (
+                  <Card
+                    data={item}
+                    key={item.id}
+                    userData={profiledata?.getMe}
+                  />
+                );
+              })}
+            </>
+          )}
+       
+        <Modal displayModal={modal} closeModal={modalHandler}>
+          {profiledata?.getMe && (
+            <AddPostModalBody
+              displayModal={modal}
+              closeModal={modalHandler}
+              modalHandler={modalHandler}
+              userData={profiledata?.getMe}
+              addPost={addPost}
+            />
+          )}
+        </Modal>
       </div>
-      <div className={classes.Cards}>
-        {!loading && feedData.length > 0 && (
-          <>
-            {feedData.map((item, index) => {
-              return (
-                <Card data={item} key={item.id} userData={profiledata?.getMe} />
-              );
-            })}
-          </>
-        )}
-      </div>
-      {modal && (
-        <div>
-          <Modal
-            modalHandler={modalHandler}
-            userData={profiledata?.getMe}
-            addPost={addPost}
-          />
-          <Backdrop showSideDrawer={modalHandler} />
-        </div>
-      )}
     </Page>
   );
 };

@@ -1,8 +1,8 @@
 /** @format */
 
 .Container {
-  font-family: "Open-Sans", sans-serif;
-  font-size: 16px;
+  font-size: 1.6rem;
+  font-family: "Open Sans", sans-serif;
 }
 
 .nav {
@@ -29,7 +29,7 @@
 }
 .deleteBtn {
   padding: 10px 30px;
-  font-size: 16px;
+  font-size: 1.6rem;
   border: 2px solid #ea2027;
   color: #ea2027;
   border-radius: 5px;
@@ -85,19 +85,19 @@
 .input {
   margin-top: 2%;
   background-color: #ebeef1;
-  font-weight: bold;
-  font-size: 16px;
+  font-size: 1.2rem;
   border: none;
-  padding: 15px;
+  padding: 1rem;
 }
 .textArea {
-  font-size: 17px;
-  padding: 15px;
+ 
+  padding: 1rem;
   background-color: #ebeef1;
   border: none;
   margin-top: 1%;
   height: 30vh;
   resize: none;
+  font-size: 1.2srem;
 }
 
 .input:focus,
@@ -113,7 +113,7 @@
 
 .submitBtn {
   padding: 10px 30px;
-  font-size: 16px;
+  font-size: 1.2rem;
   border: 2px solid #00a79d;
   color: #00a79d;
   border-radius: 5px;

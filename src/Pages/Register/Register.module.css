@@ -70,7 +70,7 @@
 .input {
   margin-top: 2%;
   width: "50%";
-  font-family: "Open Sans", sans-serif;
+
   border-radius: 5px;
   border: 1px solid #636e72;
   font-size: 17px;
@@ -84,9 +84,9 @@
 .textarea {
   width: 100%;
   border-radius: 5px;
-  font-family: "Open Sans", sans-serif;
+
   height: 20vh;
-  font-size: 18px;
+  font-size: 1.3rem;
   resize: none;
   margin-top: 1%;
   margin-bottom: 1%;

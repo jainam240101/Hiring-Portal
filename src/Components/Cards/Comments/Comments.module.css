@@ -2,7 +2,7 @@
 
 .Container {
   background: #f2f2f2;
-  font-family: "Open Sans", sans-serif;
+
   padding: 15px;
   border-radius: 10px;
 }
@@ -13,9 +13,10 @@
 
 .flex {
   display: flex;
+  cursor: pointer;
 }
 .name {
-  font-size: 18px;
+  font-size: 1.3rem;
 }
 
 .img img {

@@ -1,11 +1,12 @@
 /** @format */
 
 .newPost {
+  margin-top: 2% ;
   display: flex;
-  margin: 2% 15% 2% 15%;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
 }
 .images img {
   width: 80px;
@@ -21,22 +22,27 @@
 }
 .inputBox {
   border: none;
-  font-family: "Open Sans", sans-serif;
+
   border-radius: 15px;
   background: rgb(235, 235, 235);
   padding: 10px;
-  font-size: 16px;
+  font-size: 1.2rem;
   border: 2px solid rgb(235, 235, 235);
 }
 .input input {
   border: none;
-  font-family: "Open Sans", sans-serif;
+
   border-radius: 15px;
   background: rgb(235, 235, 235);
   padding: 10px;
-  font-size: 16px;
+  font-size: 1.2rem;
   border: 2px solid rgb(235, 235, 235);
 }
 .input input:focus {
   outline: none;
+}
+
+.cards{
+  width: 100%;
+  padding: 0% 4%;
 }

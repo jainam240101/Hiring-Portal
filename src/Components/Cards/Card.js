@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useReducer, memo, useState } from "react";
+import React, { useReducer, memo, useState, useCallback } from "react";
 // import { BsThreeDots } from "react-icons/bs";
 // import { BiLike } from "react-icons/bi";
 import classes from "./card.module.css";
@@ -10,8 +10,10 @@ import { useForm, CHANGE } from "../../Hooks/formHooks/useForm";
 import { useMutation } from "@apollo/client";
 import { createCommentMutation } from "./apollo/Mutations";
 import ToggleLikeFeedPostHook from "./Hooks/toggleLike";
-
+import { useHistory } from "react-router-dom";
+import Paths from "../../Constants/paths";
 const Card = ({ data, userData }) => {
+  const history = useHistory();
   const [createComment] = useMutation(createCommentMutation);
 
   const {
@@ -23,7 +25,7 @@ const Card = ({ data, userData }) => {
     id,
     doesUserLike,
   } = data;
-  const { name, profilePic, bio } = postedBy;
+  const { name, profilePic, bio, id: userId } = postedBy;
   const [postComments, setPostComments] = useState([...comments]);
   const [state, dispatch] = useReducer(useForm, {
     Comment: "",
@@ -64,13 +66,15 @@ const Card = ({ data, userData }) => {
     console.log(data);
     state.Comment = "";
   };
-
+  const navigateToUserProfile = useCallback(() => {
+    history.push(Paths.createProfilePath(userId));
+  }, []);
   return (
     <div className={classes.Container}>
       {/* <div className={classes.options}>
         <BsThreeDots size={25} />
       </div> */}
-      <div className={classes.top}>
+      <div className={classes.top} onClick={navigateToUserProfile}>
         <div>
           <img
             src={profilePic}
@@ -144,6 +148,7 @@ const Card = ({ data, userData }) => {
           return (
             <div className={classes.CommentsContainer}>
               <Comments
+                userId={userId}
                 profilePic={profilePic}
                 name={name}
                 comment={comment}

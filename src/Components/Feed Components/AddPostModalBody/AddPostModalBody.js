@@ -1,14 +1,14 @@
 /** @format */
 
 import React, { useReducer } from "react";
-import classes from "./Modal.module.css";
+import classes from "./AddPostModalBody.module.css";
 import { useMutation } from "@apollo/client";
 import { ImCross } from "react-icons/im";
 import { BsCardImage } from "react-icons/bs";
 import { useForm, CHANGE } from "../../../Hooks/formHooks/useForm";
-import { createPostMutation } from "../apollo/Mutation";
+import { createPostMutation } from "./apollo/Mutation";
 
-const Modal = ({ userData, addPost, modalHandler }) => {
+const AddPostModalBody = ({ userData, addPost, modalHandler }) => {
   let { profilePic, name } = userData;
   const [createPost] = useMutation(createPostMutation);
   const [state, dispatch] = useReducer(useForm, {
@@ -74,48 +74,46 @@ const Modal = ({ userData, addPost, modalHandler }) => {
     });
   };
   return (
-    <div className={classes.Container}>
-      <div className={classes.box}>
-        <div className={classes.top}>
-          <h3 className={classes.heading}>Create A Post</h3>
-          <div className={classes.cross}>
-            <ImCross
-              className={classes.Cross}
-              onClick={modalHandler}
-              color={"black"}
-              size={20}
-            />
-          </div>
-        </div>
-        <div className={classes.info}>
-          <img className={classes.pic} src={profilePic} alt={"Profile Pic"} />
-          <div className={classes.name}>{name}</div>
-        </div>
-        <textarea
-          name="description"
-          onChange={handleChange}
-          className={classes.textArea}
-          placeholder={"What Do you want to talk about?"}
-        />
-        <div className={classes.submitContainer}>
-          <input
-            name="mediaLink"
-            style={{ display: "none" }}
-            type="file"
-            id="icon-button-file"
-            accept="image/*"
-            onChange={uploadImage}
+    <div className={classes.box}>
+      <div className={classes.top}>
+        <h3 className={classes.heading}>Create A Post</h3>
+        <div className={classes.cross}>
+          <ImCross
+            className={classes.Cross}
+            onClick={modalHandler}
+            color={"black"}
+            size={20}
           />
-          <label htmlFor="icon-button-file">
-            <BsCardImage className={classes.image} size={23} />
-          </label>
-          <button onClick={submitHandler} className={classes.btn}>
-            Submit
-          </button>
         </div>
+      </div>
+      <div className={classes.info}>
+        <img className={classes.pic} src={profilePic} alt={"Profile Pic"} />
+        <div className={classes.name}>{name}</div>
+      </div>
+      <textarea
+        name="description"
+        onChange={handleChange}
+        className={classes.textArea}
+        placeholder={"What Do you want to talk about?"}
+      />
+      <div className={classes.submitContainer}>
+        <input
+          name="mediaLink"
+          style={{ display: "none" }}
+          type="file"
+          id="icon-button-file"
+          accept="image/*"
+          onChange={uploadImage}
+        />
+        <label htmlFor="icon-button-file">
+          <BsCardImage className={classes.image} size={23} />
+        </label>
+        <button onClick={submitHandler} className={classes.btn}>
+          Submit
+        </button>
       </div>
     </div>
   );
 };
 
-export default Modal;
+export default AddPostModalBody;

@@ -2,18 +2,27 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import classes from "./Header.module.css";
-import Contact from "../Contact/Contact";
-import { Link } from "react-router-dom";
-import UserActionHook, {
-  UNFOLLOWUSERREQUEST,
-  ACCEPTREQUEST,
-  REVOKEREQUEST,
-  DECLINEREQUEST,
-  REQUESTTOFOLLOW,
-} from "./Hooks/userActionHooks";
 import { useHistory } from "react-router-dom";
 import path from "../../../Constants/paths";
+import Modal from "../../../Components/Modal/Modal";
+import RevokeRequestModalBody from "./Components/RevokeRequestModalBody/RevokeRequestModalBody";
+import {
+  acceptFollowRequestMutation,
+  declineFollowRequestMutation,
+  requestToFollowUserMutation,
+  revokeToFollowUserRequestMutation,
+  unFollowUserMutation,
+} from "../../../commonApollo/Mutation/userRelationMutation";
+import { useMutation } from "@apollo/client";
 const Header = ({ userData, userRelation }) => {
+  const [acceptFollowRequest] = useMutation(acceptFollowRequestMutation);
+  const [requestToFollowUser] = useMutation(requestToFollowUserMutation);
+  const [revokeToFollowUserRequest] = useMutation(
+    revokeToFollowUserRequestMutation
+  );
+  const [declineFollowRequest] = useMutation(declineFollowRequestMutation);
+  const [unFollowUser] = useMutation(unFollowUserMutation);
+
   const history = useHistory();
   const {
     bio,
@@ -27,18 +36,22 @@ const Header = ({ userData, userRelation }) => {
     totalFollowing,
     userType,
   } = userData;
+  const [handleApi, setHandleApi] = useState({});
+  const [apiResMessage, setApiResMessage] = useState("");
   const [userRelationState, setUserRelationState] = useState({
     ...userRelation,
   });
+  const [displayModal, setDisplayModal] = useState(false);
   const [type, setType] = useState();
-  let Navigate = useCallback(() => {
-    console.log("called");
-    history.push(path.settings);
-  }, []);
+  const [data, setData] = useState({});
+  const [totalFollowersState, setTotalFollowersState] = useState(
+    totalFollowers
+  );
+  const [totalFollowingState, setTotalFollowingState] = useState(
+    totalFollowing
+  );
+
   useEffect(() => {
-    getType();
-  }, []);
-  const getType = () => {
     const {
       hasReceivedRequest,
       hasSentRequest,
@@ -55,54 +68,156 @@ const Header = ({ userData, userRelation }) => {
       } else {
         actionType = "Follow";
       }
+      if (hasSentRequest) {
+        actionType = "Requested";
+      }
     }
     setType(actionType);
-    return actionType;
-  };
-  const { loading, getActions } = UserActionHook({ id });
+  }, [userRelationState]);
+
+  useEffect(() => {
+    if (apiResMessage) {
+      let tempUserRelationState = { ...userRelationState };
+      switch (apiResMessage) {
+        case "Request sent":
+          tempUserRelationState.hasSentRequest = true;
+          break;
+        case "Request revoked":
+          tempUserRelationState.hasSentRequest = false;
+          break;
+        case "Request accepted":
+          tempUserRelationState.isFollowing = true;
+          tempUserRelationState.hasReceivedRequest = false;
+          setTotalFollowingState(totalFollowingState + 1);
+          break;
+        case "Request declined":
+          tempUserRelationState.hasReceivedRequest = false;
+          break;
+        case "unfollowed user":
+          tempUserRelationState.isFollowing = false;
+          setTotalFollowersState(totalFollowersState - 1);
+          break;
+      }
+      setUserRelationState({ ...tempUserRelationState });
+    }
+  }, [apiResMessage]);
+
+  useEffect(async () => {
+    if (handleApi) {
+      const { api, apiCallBack } = handleApi;
+      try {
+        const { errors, data } = await api({
+          variables: {
+            requestedTo: id,
+          },
+        });
+        const { success, message, error } = data[apiCallBack];
+        if (success) {
+          setApiResMessage(message);
+        }
+      } catch (err) {
+        console.log("erro", JSON.stringify(err, null, 2));
+      }
+    }
+  }, [handleApi]);
+
   const handleClick = async () => {
     let action = type;
-    let callback;
-    console.log(type);
     switch (action) {
       case "Edit profile":
         return Navigate();
       case "Unfollow":
-        callback = getActions(UNFOLLOWUSERREQUEST);
+        setHandleApi({ api: unFollowUser, apiCallBack: "unFollowUser" });
         break;
       case "Follow":
-        callback = getActions(REQUESTTOFOLLOW);
+        setHandleApi({
+          api: requestToFollowUser,
+          apiCallBack: "requestToFollowUser",
+        });
         break;
-    }
-    let data = await callback();
-    let { success, message, error } = data;
-    if (!success) {
-      alert(error);
+      case "Requested":
+        return setDisplayModal(true);
     }
   };
+  const revokeRequest = useCallback(async () => {
+    closeModal();
+    setHandleApi({
+      api: revokeToFollowUserRequest,
+      apiCallBack: "revokeToFollowUserRequest",
+    });
+  }, []);
+
+  let Navigate = useCallback(() => {
+    history.push(path.settings);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setDisplayModal(false);
+  }, [displayModal]);
   return (
-    <div className={classes.flex}>
-      <div>
-        <img src={profilePic} alt="Profile Pic" className={classes.img} />
-      </div>
-      <div className={classes.Container}>
-        <div className={classes.Heading}>{name}</div>
-        <div className={classes.Description}>{bio}</div>
-        <div className={classes.connection}>
-          <span>
-            Total Followers :{" "}
-            <span className={classes.Link}>{totalFollowers}</span>
-          </span>
-          <span>
-            Total Following :{" "}
-            <span className={classes.Link}>{totalFollowing}</span>
-          </span>
-        </div>
-        <div style={{ marginTop: "2%" }}>
-          <button className={classes.button} onClick={handleClick}>
-            <span>{type}</span>
+    <div>
+      {userRelationState.hasReceivedRequest && (
+        <div className={classes.card}>
+          <div>
+            <span>{name} wants to follow you</span>
+          </div>
+          <button
+            className={classes.btn}
+            onClick={setHandleApi.bind(this, {
+              api: acceptFollowRequest,
+              apiCallBack: "acceptFollowRequest",
+            })}
+          >
+            Accept
+          </button>
+          <button
+            className={classes.btn}
+            style={{ color: "red" }}
+            onClick={setHandleApi.bind(this, {
+              api: declineFollowRequest,
+              apiCallBack: "declineFollowRequest",
+            })}
+          >
+            Decline
           </button>
         </div>
+      )}
+      <div className={classes.flex}>
+        <div>
+          <img src={profilePic} alt="Profile Pic" className={classes.img} />
+        </div>
+        <div className={classes.container}>
+          <div className={classes.textContainer}>
+            <span className={classes.heading}>{name}</span>
+            {userRelationState.isFollower && (
+              <span className={classes.followsYou}>Follows you</span>
+            )}
+          </div>
+          <span className={classes.description}>{bio}</span>
+          <div className={classes.connection}>
+            <span>
+              Total Followers :{" "}
+              <span className={classes.Link}>{totalFollowersState}</span>
+            </span>
+            <span>
+              Total Following :{" "}
+              <span className={classes.Link}>{totalFollowingState}</span>
+            </span>
+          </div>
+          <div style={{ marginTop: "2%" }}>
+            <button className={classes.button} onClick={handleClick}>
+              <span>{type}</span>
+            </button>
+          </div>
+        </div>
+        <Modal displayModal={displayModal} closeModal={closeModal}>
+          <RevokeRequestModalBody
+            name={name}
+            profilePic={profilePic}
+            closeModal={closeModal}
+            revokeRequest={revokeRequest}
+          />
+        </Modal>
       </div>
     </div>
   );

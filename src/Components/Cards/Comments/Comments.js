@@ -1,13 +1,19 @@
 /** @format */
 
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import Action from "../Action/Action";
+import { useHistory } from "react-router-dom";
 import classes from "./Comments.module.css";
-const Comments = ({ profilePic, name, comment, nested }) => {
+import Paths from "../../../Constants/paths";
+const Comments = ({ profilePic, name, comment, nested, userId }) => {
+  const history = useHistory();
+  const navigateToUserProfile = useCallback(() => {
+    history.push(Paths.createProfilePath(userId));
+  }, []);
   return (
     <div className={nested ? classes.nested : classes.Container}>
-      <div className={classes.flex}>
+      <div className={classes.flex} onClick={navigateToUserProfile}>
         <div className={classes.img}>
           <img src={profilePic} alt="Profile Pic" />
         </div>

@@ -3,6 +3,8 @@
 .flex {
   width: 100%;
   display: flex;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 0.1rem;
 }
 
 .SideBar {
@@ -15,4 +17,5 @@
 .children {
   width: 80%;
   font-family: "Open Sans", sans-serif;
+  letter-spacing: 0.1rem;
 }

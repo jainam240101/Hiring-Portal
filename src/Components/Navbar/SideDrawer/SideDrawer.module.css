@@ -27,8 +27,8 @@
 
 .subHeading {
   color: #bcbcc6;
-  font-size: 16px;
-  font-family: "Open Sans", sans-serif;
+  font-size: 1.2rem;
+
 }
 .activeLink {
   display: flex;
@@ -37,7 +37,7 @@
   margin-right: 30%;
   background-color: #0984e3;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 1.3rem;
   color: white;
   margin-left: 4%;
 }
@@ -46,13 +46,13 @@
   padding: 3% 5%;
   margin-top: 5%;
   margin-right: 30%;
-  font-size: 18px;
+  font-size: 1.3rem;
   margin-left: 4%;
 }
 .link {
-  font-family: "Open Sans", sans-serif;
+
   margin-left: 10%;
-  font-size: 16px;
+  font-size: 1.2rem;
 }
 @keyframes moveRight {
   from {
@@ -80,7 +80,7 @@
     font-weight: bold;
     letter-spacing: 1.6px;
     text-align: center;
-    font-family: "Open Sans", sans-serif;
+  
     font-size: 2rem;
     color: #e26161;
   }
@@ -92,7 +92,7 @@
     text-decoration: none;
     margin-top: 10%;
     text-align: center;
-    font-family: "Open Sans", sans-serif;
+  
     font-size: 1.7rem;
     color: #2b303f;
   }

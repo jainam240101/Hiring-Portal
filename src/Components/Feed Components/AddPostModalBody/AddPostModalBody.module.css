@@ -1,18 +1,9 @@
 /** @format */
-
-.Container {
-  z-index: 110;
-  position: fixed;
-  display: flex;
-  top: 5%;
-  left: 25%;
-  width: 50%;
-}
 .box {
   background: white;
-  font-family: "Open Sans", sans-serif;
-  width: 100%;
+  width: 700px;
   padding: 3%;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
 }
 .top {
   display: flex;
@@ -27,17 +18,17 @@
   flex-direction: column;
   justify-content: center;
   margin-left: 2%;
-  font-size: 18px;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 .heading {
-  font-size: 18px;
+  font-size: 1.3rem;
   margin: 0;
   letter-spacing: 1.2px;
 }
 .textArea {
   margin-top: 3%;
-  font-size: 16px;
+  font-size: 1.2rem;
   padding: 10px;
   width: 100%;
   border-radius: 5px;

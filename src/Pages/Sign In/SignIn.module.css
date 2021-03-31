@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   background-color: #3040c4;
-  font-family: "Open-Sans", sans-serif;
+  
 }
 .box {
   display: flex;
@@ -45,7 +45,7 @@
   border: none;
   margin: 2% 28%;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1.2rem;
   padding: 15px;
 }
 .btn {
@@ -54,7 +54,7 @@
   color: white;
   border: none;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 1.3rem;
   padding: 15px 25px;
 }
 .btn2 {
@@ -64,7 +64,7 @@
   border: none;
   display: block;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 1.3rem;
   padding: 15px 25px;
 }
 .link {
@@ -74,7 +74,7 @@
 .Register {
   padding-top: 4%;
 
-  font-size: 18px;
-  font-family: "Open Sans", sans-serif;
+  font-size: 1.3rem;
+
   text-align: center;
 }

@@ -125,7 +125,7 @@ const Settings = () => {
         </div>
         <div className={classes.topContainer}>
           <div className={classes.heading}>Update Basic Details</div>
-          <button className={classes.deleteBtn}>Delete Account</button>
+          {/* <button className={classes.deleteBtn}>Delete Account</button> */}
         </div>
         <div className={classes.bottomContainer}>
           <div className={classes.form}>
