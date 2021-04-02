@@ -12,6 +12,8 @@ import Feed from "./Pages/Feed/Feed";
 import SignIn from "./Pages/Sign In/SignIn";
 import { cache } from ".";
 import Settings from "./Pages/User Settings/Settings";
+import Requests from "./Pages/Requests/Requests"
+import Search from './Pages/Search/Search'
 const App = () => {
   const { data, error } = useQuery(me);
   try {
@@ -42,6 +44,8 @@ const App = () => {
       <Route path={Paths.register} exact component={Register} />
       <Route path={Paths.settings} exact component={Settings} />
       <Route path={Paths.feed} exact component={Feed} />
+      <Route path={Paths.requests} exact component={Requests} />
+      <Route path={Paths.search} exact component={Search} />
       {/* <Route path={Paths.homepage} exact component={HomePage} /> */}
     </Switch>
   );

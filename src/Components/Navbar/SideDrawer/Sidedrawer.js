@@ -25,7 +25,7 @@ const SideDrawer = () => {
   return (
     <div className={classes.Container}>
       <h1 className={classes.heading}>Talent Hunt</h1>
-      <div>
+      <div >
         {Object.keys(navBar).map((item, index) => {
           return (
             <div className={classes.subContainer}>

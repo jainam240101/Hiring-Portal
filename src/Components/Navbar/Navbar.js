@@ -1,13 +1,18 @@
 /** @format */
 
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useCallback } from "react";
 import classes from "./Navbar.module.css";
 import Backdrop from "./Backdrop/Backdrop";
 import { GoSearch } from "react-icons/go";
 import { debounce } from "./Helper";
+import { useHistory } from "react-router-dom";
+import Paths from "../../Constants/paths";
 import SignIn from "../Sign In/SignIn";
 
-const Navbar = ({ showSideDrawer }) => {
+const Navbar = (props) => {
+  const { showSideDrawer } = props;
+  const history = useHistory();
+  const [search, setSearch] = useState("");
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [SigninHandler, setSigninHandler] = useState(false);
@@ -29,13 +34,34 @@ const Navbar = ({ showSideDrawer }) => {
   const buttonHandler = () => {
     setSigninHandler(!SigninHandler);
   };
+  const handleChange = useCallback((e) => {
+    setSearch(e.target.value);
+  }, []);
+  const navigate = useCallback(() => {
+    console.log(search, "iss");
+    history.push(Paths.createSearchPath(search));
+  }, [search]);
+  const onKeyUp = (event) => {
+    if (event.keyCode == 13) {
+      navigate();
+    }
+  };
   return (
     <div
       className={classes.Container}
-      style={{ top: visible ? "0" : "-100px" }}>
+      style={{ top: visible ? "0" : "-100px" }}
+    >
       <div className={classes.searchContainer}>
-        <GoSearch size={25} />
-        <input placeholder={"Search"} className={classes.input} type={"text"} />
+        <GoSearch size={25} onClick={navigate} style={{ cursor: "pointer" }} />
+        <input
+          placeholder={"Search"}
+          className={classes.input}
+          type={"text"}
+          onChange={handleChange}
+          onSubmit={navigate}
+          onSubmitCapture={navigate}
+          onKeyUp={onKeyUp}
+        />
       </div>
       {/* <div className={classes.btnArea}>
         <button onClick={buttonHandler} className={classes.btn}>

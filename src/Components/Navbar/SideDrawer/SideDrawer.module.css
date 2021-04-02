@@ -7,17 +7,17 @@
   background-color: #f6f6f6;
   height: 100%;
   width: 20vw;
+  font-family: "Open Sans", sans-serif;
+  padding: 0 2%;
 }
 .heading {
   margin: 0;
-  text-align: center;
-  padding-top: 10%;
-  font-size: 25px;
-  font-family: "Noto Sans", sans-serif;
+  text-align: start;
+  margin-top: 10%;
+  font-size: 2rem;
 }
 .subContainer {
   margin-top: 3%;
-  margin-left: 15%;
 }
 .notActive:hover {
   cursor: pointer;
@@ -26,31 +26,32 @@
 }
 
 .subHeading {
-  color: #bcbcc6;
-  font-size: 1.2rem;
-
+  color: black;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 .activeLink {
   display: flex;
   padding: 3% 5%;
   margin-top: 5%;
-  margin-right: 30%;
   background-color: #0984e3;
   border-radius: 5px;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: white;
-  margin-left: 4%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .notActive {
   display: flex;
   padding: 3% 5%;
   margin-top: 5%;
-  margin-right: 30%;
-  font-size: 1.3rem;
-  margin-left: 4%;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .link {
-
   margin-left: 10%;
   font-size: 1.2rem;
 }
@@ -80,7 +81,7 @@
     font-weight: bold;
     letter-spacing: 1.6px;
     text-align: center;
-  
+
     font-size: 2rem;
     color: #e26161;
   }
@@ -92,7 +93,7 @@
     text-decoration: none;
     margin-top: 10%;
     text-align: center;
-  
+
     font-size: 1.7rem;
     color: #2b303f;
   }

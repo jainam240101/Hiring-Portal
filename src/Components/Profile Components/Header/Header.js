@@ -86,7 +86,7 @@ const Header = ({ userData, userRelation }) => {
           tempUserRelationState.hasSentRequest = false;
           break;
         case "Request accepted":
-          tempUserRelationState.isFollowing = true;
+          tempUserRelationState.isFollower = true;
           tempUserRelationState.hasReceivedRequest = false;
           setTotalFollowingState(totalFollowingState + 1);
           break;

@@ -60,7 +60,7 @@ const Card = ({ data, userData }) => {
         comment: state.Comment,
         id: commentId,
       };
-      return [...prevComments, newComment];
+      return [newComment, ...prevComments];
     });
     console.log(errors);
     console.log(data);
@@ -131,12 +131,7 @@ const Card = ({ data, userData }) => {
           placeholder="Write a comment"
           className={classes.inputBox}
         />
-        <button
-          onClick={() => {
-            alert("coming next");
-          }}
-          className={classes.btn}
-        >
+        <button onClick={submitHandler} className={classes.btn}>
           Submit
         </button>
       </div>
