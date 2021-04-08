@@ -65,13 +65,14 @@ const Feed = () => {
           alignItems: "center",
           flex: 1,
           flexDirection: "column",
-          padding:'0% 15%',
+          padding: "2% 15%",
         }}
       >
         <div className={classes.newPost}>
-          <div className={classes.images}>
+          <div>
             <img
               src={profiledata?.getMe.profilePic}
+              className={classes.images}
               alt="ProfilePic"
               style={{ objectFit: "contain" }}
             />
@@ -82,21 +83,17 @@ const Feed = () => {
             </div>
           </div>
         </div>
-       
-          {!loading && feedData.length > 0 && (
-            <>
-              {feedData.map((item, index) => {
-                return (
-                  <Card
-                    data={item}
-                    key={item.id}
-                    userData={profiledata?.getMe}
-                  />
-                );
-              })}
-            </>
-          )}
-       
+
+        {!loading && feedData.length > 0 && (
+          <>
+            {feedData.map((item, index) => {
+              return (
+                <Card data={item} key={item.id} userData={profiledata?.getMe} />
+              );
+            })}
+          </>
+        )}
+
         <Modal displayModal={modal} closeModal={modalHandler}>
           {profiledata?.getMe && (
             <AddPostModalBody

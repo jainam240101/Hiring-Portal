@@ -1,17 +1,18 @@
 /** @format */
 
 .newPost {
-  margin-top: 2% ;
   display: flex;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
   width: 100%;
 }
-.images img {
+.images {
   width: 80px;
   height: 80px;
-  border-radius: 10px
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 20px;
 }
 .input {
   display: flex;
@@ -42,7 +43,7 @@
   outline: none;
 }
 
-.cards{
+.cards {
   width: 100%;
   padding: 0% 4%;
 }

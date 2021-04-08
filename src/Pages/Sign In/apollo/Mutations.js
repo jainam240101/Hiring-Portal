@@ -2,6 +2,13 @@
 
 import { gql } from "@apollo/client";
 
+/**
+ * This query returns feed data
+ * @param  email  email of user 
+ * @param  password password of user
+ * @return   success , message , error
+ */
+
 export const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
     signIn(input: { email: $email, password: $password }) {
