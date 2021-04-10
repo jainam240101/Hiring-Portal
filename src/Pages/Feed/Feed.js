@@ -86,24 +86,14 @@ const Feed = () => {
           alignItems: "center",
           flex: 1,
           flexDirection: "column",
-<<<<<<< HEAD
-          padding: "0% 15%",
-        }}>
-=======
           padding: "2% 15%",
-        }}
-      >
->>>>>>> 6109d66d3470ecf43bc6fa19ba92c0fe374b589f
+        }}>
         <div className={classes.newPost}>
           <div>
             <img
               src={profiledata?.getMe.profilePic}
-<<<<<<< HEAD
               alt='ProfilePic'
-=======
               className={classes.images}
-              alt="ProfilePic"
->>>>>>> 6109d66d3470ecf43bc6fa19ba92c0fe374b589f
               style={{ objectFit: "contain" }}
             />
           </div>
@@ -115,7 +105,6 @@ const Feed = () => {
         </div>
 
         {!loading && feedData.length > 0 && (
-<<<<<<< HEAD
           <div style={{ width: "100%" }}>
             <InfiniteScroll
               dataLength={feedData.length}
@@ -138,15 +127,6 @@ const Feed = () => {
               })}
             </InfiniteScroll>
           </div>
-=======
-          <>
-            {feedData.map((item, index) => {
-              return (
-                <Card data={item} key={item.id} userData={profiledata?.getMe} />
-              );
-            })}
-          </>
->>>>>>> 6109d66d3470ecf43bc6fa19ba92c0fe374b589f
         )}
 
         <Modal displayModal={modal} closeModal={modalHandler}>
