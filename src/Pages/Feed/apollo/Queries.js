@@ -1,6 +1,11 @@
 /** @format */
 
 import { gql } from "@apollo/client";
+/**
+ * This query returns feed data
+ * @param  pageNo  page no used for pagination
+ * @return  feed data ( i.e id , likes , description , mediaLink , comments)
+ */
 
 export const Queries = gql`
   query getPosts($pageNo: Int!) {

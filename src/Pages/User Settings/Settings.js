@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/client";
 import {
   useForm,
   CHANGE,
-  EDITUSERINITIALSTATE,
+  EDITCHUNKVALUES,
   PUSHARRAY,
   POPWITHINDEXARRAY,
 } from "../../Hooks/formHooks/useForm";
@@ -103,7 +103,7 @@ const Settings = () => {
     if (!dispatched) {
       console.log(profiledata.getMe);
       dispatch({
-        type: EDITUSERINITIALSTATE,
+        type: EDITCHUNKVALUES,
         values: {
           Name: profiledata.getMe.name,
           Bio: profiledata.getMe.bio,

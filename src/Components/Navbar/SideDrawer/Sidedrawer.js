@@ -7,6 +7,9 @@ import { cache } from "../../../index";
 import { getProfileData } from "../../../commonApollo/Queries/userQuery";
 import navBar from "../Constants/navBarList";
 
+/**
+ * This component accepts an object , and it will traverse and map all side drawer titles and icons
+ */
 const SideDrawer = () => {
   const [state, setstate] = useState("Home");
   const router = useHistory();
@@ -14,18 +17,16 @@ const SideDrawer = () => {
     setstate(`/${router.location.pathname.split("/")[1]}`);
   }, []);
   const onClickHandler = (value) => {
-
     router.push(value);
   };
   const profiledata = cache.readQuery({
     query: getProfileData,
   });
 
-
   return (
     <div className={classes.Container}>
       <h1 className={classes.heading}>Talent Hunt</h1>
-      <div >
+      <div>
         {Object.keys(navBar).map((item, index) => {
           return (
             <div className={classes.subContainer}>

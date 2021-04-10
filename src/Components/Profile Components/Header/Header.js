@@ -14,6 +14,24 @@ import {
   unFollowUserMutation,
 } from "../../../commonApollo/Mutation/userRelationMutation";
 import { useMutation } from "@apollo/client";
+
+/**
+ * Most complex part of app
+ * So user are going to have 5 operation follow , unfollow , decline , accept and revoke request
+ * Based on user realtion received we are going to render buttons and text accordingly
+ * whenever user fires an action example send request to user , now the userRelation needs to be changed along with
+ * new possibilties of action should be rendered like revoke request and see that your request is in pending state.
+ * So everything is happening because of sideEffect handled with useEffect
+ * whenever user will fire an action we will store the api and callBack string to extract data in handleApi state
+ * now as soon as handleApi state is changed it's respective api will be called based upon message recived we will
+ * set our apiResMessage , which will react upon userRelation state like updating follower , following count
+ * and userRelation state will react with required button text renderings.
+ * Reason we went with so many useEffects is that there were too many state to handle in single function
+ * and instead of going with functional programming and splitting in functions , we did it with useEffects
+ * because states are async in nature and we might get false copy some time and workaround of storing new state value in var and passing
+ * around didn't made sense
+ */
+
 const Header = ({ userData, userRelation }) => {
   const [acceptFollowRequest] = useMutation(acceptFollowRequestMutation);
   const [requestToFollowUser] = useMutation(requestToFollowUserMutation);
@@ -51,6 +69,9 @@ const Header = ({ userData, userRelation }) => {
     totalFollowing
   );
 
+  /**
+   * This useEffect is to handle button text based upon new userRelation state
+   */
   useEffect(() => {
     const {
       hasReceivedRequest,
@@ -75,6 +96,9 @@ const Header = ({ userData, userRelation }) => {
     setType(actionType);
   }, [userRelationState]);
 
+  /**
+   * This useEffect is important to change userRelations object , so our button text and next types are updated
+   */
   useEffect(() => {
     if (apiResMessage) {
       let tempUserRelationState = { ...userRelationState };
@@ -102,6 +126,9 @@ const Header = ({ userData, userRelation }) => {
     }
   }, [apiResMessage]);
 
+  /**
+   * This useEffect will handle api calling and store the message in ApiResmessage
+   */
   useEffect(async () => {
     if (handleApi) {
       const { api, apiCallBack } = handleApi;
@@ -120,6 +147,10 @@ const Header = ({ userData, userRelation }) => {
       }
     }
   }, [handleApi]);
+
+  /**
+   * should be fired on click which will set handleAPI along with callback string to extract data
+   */
 
   const handleClick = async () => {
     let action = type;
@@ -148,9 +179,9 @@ const Header = ({ userData, userRelation }) => {
   }, []);
 
   let Navigate = useCallback(() => {
-    history.push(path.settings);
+    alert("next");
   }, []);
-
+  // history.push(path.settings);
   const closeModal = useCallback(() => {
     setDisplayModal(false);
   }, [displayModal]);

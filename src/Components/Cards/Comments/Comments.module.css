@@ -23,6 +23,7 @@
   width: 60px;
   border-radius: 50%;
   height: 60px;
+  object-fit: contain;
 }
 .topContainer {
   display: flex;
