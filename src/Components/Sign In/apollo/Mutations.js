@@ -7,6 +7,7 @@ export const SIGN_IN = gql`
     signIn(input: { email: $email, password: $password }) {
       success
       cookie
+      message
       data {
         name
         email

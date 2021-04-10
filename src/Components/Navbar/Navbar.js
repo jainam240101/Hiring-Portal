@@ -1,17 +1,20 @@
 /** @format */
 
-import React, { useState, useEffect, Fragment, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import classes from "./Navbar.module.css";
-import Backdrop from "./Backdrop/Backdrop";
 import { GoSearch } from "react-icons/go";
 import { debounce } from "./Helper";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Paths from "../../Constants/paths";
-import SignIn from "../Sign In/SignIn";
+import { LogoutMutation } from "./apollo/Logout";
+import { useMutation } from "@apollo/client";
+import { cache } from "../../index";
 
 const Navbar = (props) => {
+  const [Logout] = useMutation(LogoutMutation);
   const { showSideDrawer } = props;
   const history = useHistory();
+  const location = useLocation();
   const [search, setSearch] = useState("");
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -25,11 +28,22 @@ const Navbar = (props) => {
     );
     setPrevScrollPos(currentScrollPos);
   }, 100);
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [prevScrollPos, visible, handleScroll]);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos, visible, handleScroll]);
+  useEffect(() => {
+    let queryParams = {};
+    const query = new URLSearchParams(history.location.search);
+    for (let param of query?.entries()) {
+      queryParams[param[0]] = param[1];
+    }
+    if (queryParams.q) {
+      setSearch(queryParams.q);
+    }
+    // console.log(queryParams.q, queryParams);
+  }, []);
 
   const buttonHandler = () => {
     setSigninHandler(!SigninHandler);
@@ -39,41 +53,46 @@ const Navbar = (props) => {
   }, []);
   const navigate = useCallback(() => {
     console.log(search, "iss");
-    history.push(Paths.createSearchPath(search));
+    history.replace(Paths.createSearchPath(search));
   }, [search]);
   const onKeyUp = (event) => {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       navigate();
+    }
+  };
+  const logoutHandler = async () => {
+    try {
+      Object.keys(cache.data.data).forEach((key) => cache.data.delete(key));
+      console.log(cache.data.data);
+      const { data } = await Logout();
+      console.log(data);
+      history.push("/signin");
+    } catch (error) {
+      history.push("/signin");
     }
   };
   return (
     <div
       className={classes.Container}
-      style={{ top: visible ? "0" : "-100px" }}
-    >
+      style={{ top: visible ? "0" : "-100px" }}>
       <div className={classes.searchContainer}>
         <GoSearch size={25} onClick={navigate} style={{ cursor: "pointer" }} />
         <input
           placeholder={"Search"}
           className={classes.input}
           type={"text"}
+          value={search}
           onChange={handleChange}
           onSubmit={navigate}
           onSubmitCapture={navigate}
           onKeyUp={onKeyUp}
         />
       </div>
-      {/* <div className={classes.btnArea}>
-        <button onClick={buttonHandler} className={classes.btn}>
-          Sign In
+      <div>
+        <button onClick={logoutHandler} className={classes.Logoutbtn}>
+          Logout
         </button>
       </div>
-      {SigninHandler ? (
-        <Fragment>
-          <SignIn showSideDrawer={buttonHandler} />
-          <Backdrop showSideDrawer={buttonHandler} />
-        </Fragment>
-      ) : null} */}
       <div onClick={() => showSideDrawer(true)} className={classes.hamburger}>
         <div className={classes.lines}></div>
         <div className={classes.lines}></div>

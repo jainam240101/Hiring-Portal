@@ -39,7 +39,6 @@
   border-radius: 5px;
   border: 1px solid black;
   font-size: 1.3rem;
-
 }
 .btn:hover {
   cursor: pointer;
@@ -60,12 +59,10 @@
 .link {
   font-size: 1.3rem;
   margin-right: 18%;
-
 }
 .link1 {
   color: white;
   font-size: 20px;
-
 }
 
 .link:hover {
@@ -78,6 +75,20 @@
 }
 .hamburger {
   display: none;
+}
+
+.Logoutbtn {
+  padding: 8px 30px;
+  border: 1px solid tomato;
+  background-color: none;
+  cursor: pointer;
+  color: tomato;
+  font-size: 18px;
+  border-radius: 5px;
+}
+.Logoutbtn:hover {
+  background-color: tomato;
+  color: white;
 }
 
 @keyframes moveDown {

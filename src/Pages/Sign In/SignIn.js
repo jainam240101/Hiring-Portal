@@ -8,9 +8,8 @@ import { useHistory } from "react-router-dom";
 import SignINSVG from "../../assets/SignIn.svg";
 import { SIGN_IN } from "./apollo/Mutations";
 import { useMutation } from "@apollo/client";
-import Cookie from "universal-cookie";
 import Paths from "../../Constants/paths";
-const CookieService = new Cookie();
+
 const SignIn = () => {
   const history = useHistory();
   const [state, dispatch] = useReducer(useForm, {

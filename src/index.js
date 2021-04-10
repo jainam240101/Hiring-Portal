@@ -17,15 +17,14 @@ const CookieService = new Cookie();
 export const cache = new InMemoryCache();
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
-  credentials: 'include',
-  fetchOptions: 'include'
+  credentials: "include",
+  fetchOptions: "include",
 });
 
 const authLink = setContext((Cookie, { headers }) => {
-  console.log(Cookie,'from auth link',)
   const token = CookieService.get("userSession");
-  const temp=CookieService.getAll("connect.sid")
-  console.log(temp,'temptemptemp',)
+  // const temp=CookieService.getAll("connect.sid")
+  // console.log(temp,'temptemptemp',)
   return {
     headers: {
       ...headers,

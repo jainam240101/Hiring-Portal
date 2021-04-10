@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Paths from "./Constants/paths";
 import HomePage from "./Pages/Homepage/HomePage";
 import Register from "./Pages/Register/Register";
@@ -12,13 +12,16 @@ import Feed from "./Pages/Feed/Feed";
 import SignIn from "./Pages/Sign In/SignIn";
 import { cache } from ".";
 import Settings from "./Pages/User Settings/Settings";
-import Requests from "./Pages/Requests/Requests"
-import Search from './Pages/Search/Search'
+import Requests from "./Pages/Requests/Requests";
+import Search from "./Pages/Search/Search";
 const App = () => {
   const { data, error } = useQuery(me);
+  const history = useHistory();
   try {
-    console.log(error);
-    console.log(data);
+    if (error) {
+      history.push("/signin");
+    }
+    console.log("TRIGGERING");
     if (data.getMe) {
       cache.writeQuery({
         query: IS_LOGGED_IN,
@@ -46,7 +49,7 @@ const App = () => {
       <Route path={Paths.feed} exact component={Feed} />
       <Route path={Paths.requests} exact component={Requests} />
       <Route path={Paths.search} exact component={Search} />
-      {/* <Route path={Paths.homepage} exact component={HomePage} /> */}
+      <Route path={Paths.homepage} exact component={HomePage} />
     </Switch>
   );
 };
