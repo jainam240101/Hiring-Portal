@@ -1,62 +1,56 @@
 /** @format */
 
-import React, { useEffect, useState, useCallback, memo } from "react";
-import { useHistory } from "react-router-dom";
-import Page from "../../HOC/Page";
-import ProfileCard from "./Components/ProfileCard";
+import React, { useState, useEffect } from "react";
 import classes from "./Search.module.css";
+import Page from "../../HOC/Page";
 import { useLazyQuery } from "@apollo/client";
 import { Queries } from "./apollo/Queries";
-import Paths from "../../Constants/paths";
+import ProfileCard from "./Components/ProfileCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const Search = (props) => {
-  const history = useHistory();
+const Search = () => {
+  const [select, setselect] = useState("People");
+  const [search, setSearch] = useState("");
   const [pageNo, setpageNo] = useState(0);
   const [hasMore, sethasMore] = useState(true);
-  const [searchResult, setSearchResult] = useState([]);
-  const [searchUsers, { loading, data, error, fetchMore }] = useLazyQuery(
-    Queries
+  const [result, setresult] = useState([]);
+
+  const [searchUsers, { loading, error, data, fetchMore }] = useLazyQuery(
+    Queries,
+    {
+      variables: {
+        pageNo: pageNo,
+      },
+    }
   );
 
   useEffect(() => {
     if (data) {
-      const { data: result, message } = data?.searchUsers;
+      const { data: userData, message } = data?.searchUsers;
+      console.log("in", data.searchUsers.message);
+      if (data.length <= 10) {
+        sethasMore(false);
+      }
       if (message === "No Data") {
         console.log("Firing");
         sethasMore(false);
         return;
       }
-      console.log(result.length);
-      if (result.length <= 10) {
-        sethasMore(false);
-      }
-      setSearchResult((prevData) => {
-        return [...prevData, ...result];
-      });
+      setresult(userData);
     }
   }, [data]);
-  useEffect(() => {
-    console.log("erro", JSON.stringify(error, null, 2));
-  }, [error]);
-  useEffect(() => {
-    let queryParams = {};
-    const query = new URLSearchParams(props.location.search);
-    for (let param of query.entries()) {
-      queryParams[param[0]] = param[1];
-    }
-    console.log(queryParams.q, queryParams);
-    searchUsers({
-      variables: { search: queryParams.q, skills: [], pageNo: pageNo },
-    });
-  }, [props.location.search]);
+
+  const changeSearchCriteria = (e) => {
+    setselect(e.target.value);
+  };
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
 
   const fetchMoredata = async () => {
-    console.log("Fired");
+    console.log("more");
     var page = pageNo + 1;
-    console.log("Page ", page);
-    console.log("from fetchMore");
-    let result = await fetchMore({
+    await fetchMore({
       variables: { pageNo: page },
       updateQuery: (_, { fetchMoreResult }) => {
         return fetchMoreResult;
@@ -65,48 +59,71 @@ const Search = (props) => {
     setpageNo(page);
   };
 
-  const navigateToProfile = useCallback((id) => {
-    history.push(Paths.createProfilePath(id));
-  }, []);
+  const submitHandler = async () => {
+    if (select === "People") {
+      await searchUsers({
+        variables: {
+          search: search,
+          skills: [],
+          pageNo: pageNo,
+        },
+      });
+    }
+    if (select === "Skills") {
+      await searchUsers({
+        variables: {
+          skills: search.split(" "),
+          pageNo: pageNo,
+        },
+      });
+    }
+  };
+  const onKeyUp = (event) => {
+    if (event.keyCode === 13) {
+      submitHandler();
+    }
+  };
   return (
     <Page>
-      <div className={classes.pageContainer}>
-        {loading ? (
-          <p>Loading</p>
-        ) : (
-          <div style={{ width: "100%" }}>
-            <InfiniteScroll
-              dataLength={searchResult.length}
-              hasMore={hasMore}
-              next={fetchMoredata}
-              endMessage={
-                <p style={{ textAlign: "center" }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }
-              loader={<h4>Loading....</h4>}>
-              <div className={classes.profileWrapper}>
-                {searchResult.map((item, index) => (
-                  <ProfileCard
-                    key={item.id}
-                    userData={item}
-                    navigateToProfile={navigateToProfile}
-                  />
-                ))}
-              </div>
-            </InfiniteScroll>
-          </div>
-        )}
+      <div className={classes.Container}>
+        <div className={classes.InputContainer}>
+          <p>Note: If searching through skills put " " in between</p>
+          <br />
+          <select
+            className={classes.options}
+            onChange={changeSearchCriteria}
+            value={select}>
+            <option>People</option>
+            <option>Skills</option>
+          </select>
+          <input
+            className={classes.input}
+            onChange={handleChange}
+            value={search}
+            placeholder={"Enter"}
+            onKeyUp={onKeyUp}
+          />
+          <button onClick={submitHandler} className={classes.submitBtn}>
+            Submit
+          </button>
+        </div>
+        <div>
+          <InfiniteScroll
+            dataLength={result.length}
+            hasMore={hasMore}
+            next={fetchMoredata}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }>
+            {result.map((element, index) => (
+              <ProfileCard key={index} userData={element} />
+            ))}
+          </InfiniteScroll>
+        </div>
       </div>
     </Page>
   );
 };
-
-function areEqual(prevProps, nextProps) {
-  if (prevProps.location.search !== nextProps.location.search) {
-    window.location.reload();
-  }
-  return prevProps.location.search !== nextProps.location.search;
-}
-
-export default memo(Search, areEqual);
+export default Search;

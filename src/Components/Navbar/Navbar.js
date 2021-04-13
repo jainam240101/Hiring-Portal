@@ -52,8 +52,7 @@ const Navbar = (props) => {
     setSearch(e.target.value);
   }, []);
   const navigate = useCallback(() => {
-    console.log(search, "iss");
-    history.replace(Paths.createSearchPath(search));
+    history.push("/search");
   }, [search]);
   const onKeyUp = (event) => {
     if (event.keyCode === 13) {
@@ -77,7 +76,7 @@ const Navbar = (props) => {
       style={{ top: visible ? "0" : "-100px" }}>
       <div className={classes.searchContainer}>
         <GoSearch size={25} onClick={navigate} style={{ cursor: "pointer" }} />
-        <input
+        {/* <input
           placeholder={"Search"}
           className={classes.input}
           type={"text"}
@@ -86,7 +85,7 @@ const Navbar = (props) => {
           onSubmit={navigate}
           onSubmitCapture={navigate}
           onKeyUp={onKeyUp}
-        />
+        /> */}
       </div>
       <div>
         <button onClick={logoutHandler} className={classes.Logoutbtn}>

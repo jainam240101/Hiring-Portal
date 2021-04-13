@@ -1,7 +1,7 @@
 /** @format */
 /**
  * Global object to define routes this way we don't deal with magic strings and changing routes is fast
- * @return   Global object to defint routes
+ * @return   Global object to definte routes
  */
 const path = {
   homepage: "/",
@@ -17,12 +17,11 @@ const path = {
   },
   signIn: "/signin",
   settings: "/settings",
-  temp: "/Temp",
   requests: "/requests",
   search: "/search",
-  createSearchPath: (search) => {
-    return `/search?q=${search}`;
-  },
+  // createSearchPath: (search) => {
+  //   return `/search?q=${search}`;
+  // },
 };
 
 export default path;

@@ -37,15 +37,14 @@ const SideDrawer = () => {
                 path =
                   createUrlPath !== undefined
                     ? createUrlPath(profiledata?.getMe.id)
-                    : `/${path.split("/")[1]}`;
+                    : `/${path?.split("/")[1]}`;
 
                 return (
                   <div
                     onClick={onClickHandler.bind(this, path)}
                     className={
                       state === path ? classes.activeLink : classes.notActive
-                    }
-                  >
+                    }>
                     <Icon size={20} />
                     <div className={classes.link}>
                       <span>{title}</span>

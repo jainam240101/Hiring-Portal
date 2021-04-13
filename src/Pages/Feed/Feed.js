@@ -33,9 +33,6 @@ const Feed = () => {
         sethasMore(false);
         return;
       }
-      if (postData.length <= 10) {
-        sethasMore(false);
-      }
       setFeedData((prevData) => {
         return [...prevData, ...postData];
       });

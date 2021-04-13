@@ -14,14 +14,16 @@ import { cache } from ".";
 import Settings from "./Pages/User Settings/Settings";
 import Requests from "./Pages/Requests/Requests";
 import Search from "./Pages/Search/Search";
+
 const App = () => {
   const { data, error } = useQuery(me);
   const history = useHistory();
   try {
     if (error) {
+      // if (history.location.pathname !== "/") {
       history.push("/signin");
+      // }
     }
-    console.log("TRIGGERING");
     if (data.getMe) {
       cache.writeQuery({
         query: IS_LOGGED_IN,
@@ -38,7 +40,7 @@ const App = () => {
       });
     }
   } catch (error) {
-    console.log("erro", JSON.stringify(error, null, 2));
+    // console.log("erro", JSON.stringify(error, null, 2));
   }
   return (
     <Switch>
