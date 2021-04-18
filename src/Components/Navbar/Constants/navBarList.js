@@ -1,3 +1,5 @@
+/** @format */
+
 import { HiHome } from "react-icons/hi";
 import { MdFeedback } from "react-icons/md";
 import { IoIosBriefcase } from "react-icons/io";
@@ -15,7 +17,7 @@ const navBar = {
   Feed: [
     // { Icon: HiHome, title: "Home", path: Paths.homepage },
     { Icon: MdFeedback, title: "Feed", path: Paths.feed },
-    { Icon: IoIosBriefcase, title: "Jobs", path: Paths.jobs },
+    { Icon: IoIosBriefcase, title: "Search", path: Paths.search },
   ],
   "User Information": [
     {

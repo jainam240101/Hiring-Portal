@@ -25,12 +25,13 @@ const Card = ({ data, userData }) => {
     id,
     doesUserLike,
   } = data;
+
   const { name, profilePic, bio, id: userId } = postedBy;
   const [postComments, setPostComments] = useState([...comments]);
   const [state, dispatch] = useReducer(useForm, {
     Comment: "",
   });
-
+  const PostId = data.id;
   const { totalLikes, error, toggleLike, userLikes } = ToggleLikeFeedPostHook({
     id,
     doesUserLike: doesUserLike || false,
@@ -78,7 +79,7 @@ const Card = ({ data, userData }) => {
         <div>
           <img
             src={profilePic}
-            alt="ProfilePic"
+            alt='ProfilePic'
             style={{ objectFit: "contain" }}
           />
         </div>
@@ -97,7 +98,7 @@ const Card = ({ data, userData }) => {
               <img
                 style={{ height: "100%", width: "100%", objectFit: "contain" }}
                 src={mediaLink}
-                alt="ProfilePic"
+                alt='ProfilePic'
               />
             </div>
           )}
@@ -108,14 +109,14 @@ const Card = ({ data, userData }) => {
               flexDirection: "row",
               flexGrow: 1,
               width: "100%",
-            }}
-          >
+            }}>
             <div className={classes.like}>{totalLikes} likes</div>
             <div className={classes.comments}>
               {comments.length || 0} comments
             </div>
           </div>
           <Action
+            postId={PostId}
             LikeHandler={toggleLike}
             showShare={true}
             userLikes={userLikes}
@@ -127,8 +128,8 @@ const Card = ({ data, userData }) => {
           type={"text"}
           value={state.Comment}
           onChange={handleChange}
-          name="Comment"
-          placeholder="Write a comment"
+          name='Comment'
+          placeholder='Write a comment'
           className={classes.inputBox}
         />
         <button onClick={submitHandler} className={classes.btn}>
