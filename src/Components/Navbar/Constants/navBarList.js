@@ -17,11 +17,7 @@ const navBar = {
   Feed: [
     // { Icon: HiHome, title: "Home", path: Paths.homepage },
     { Icon: MdFeedback, title: "Feed", path: Paths.feed },
-<<<<<<< HEAD
     { Icon: IoIosBriefcase, title: "Jobs", path: Paths.temp },
-=======
-    { Icon: IoIosBriefcase, title: "Search", path: Paths.search },
->>>>>>> ebbd9c3494aab4516ff6e1915d11c08cbe373f35
   ],
   "User Information": [
     {
