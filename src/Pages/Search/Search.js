@@ -27,13 +27,14 @@ const Search = () => {
   useEffect(() => {
     if (data) {
       const { data: userData, message } = data?.searchUsers;
-      console.log("in", data.searchUsers.message);
+      console.log("in", data);
       if (data.length <= 10) {
         sethasMore(false);
       }
       if (message === "No Data") {
         console.log("Firing");
         sethasMore(false);
+        setresult(userData);
         return;
       }
       setresult(userData);
@@ -115,7 +116,7 @@ const Search = () => {
             style={{display:'flex',flexWrap:'wrap',flexDirection:'row'}}
             endMessage={
               <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
+                <b>No More Data</b>
               </p>
             }>
             {result.map((element, index) => (

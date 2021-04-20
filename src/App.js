@@ -14,6 +14,7 @@ import { cache } from ".";
 import Settings from "./Pages/User Settings/Settings";
 import Requests from "./Pages/Requests/Requests";
 import Search from "./Pages/Search/Search";
+import Post from "./Pages/Post/Post";
 
 const App = () => {
   const { data, error } = useQuery(me);
@@ -38,21 +39,22 @@ const App = () => {
           userType: data.getMe.userType,
         },
       });
-    }
+       }
   } catch (error) {
     // console.log("erro", JSON.stringify(error, null, 2));
   }
   return (
-    <Switch>
-      <Route path={Paths.profile} component={Profile} />
-      <Route path={Paths.signIn} exact component={SignIn} />
-      <Route path={Paths.register} exact component={Register} />
-      <Route path={Paths.settings} exact component={Settings} />
-      <Route path={Paths.feed} exact component={Feed} />
-      <Route path={Paths.requests} exact component={Requests} />
-      <Route path={Paths.search} exact component={Search} />
-      <Route path={Paths.homepage} exact component={HomePage} />
-    </Switch>
+      <Switch>
+        <Route path={Paths.posts} component={Post} />
+        <Route path={Paths.profile} component={Profile} />
+        <Route path={Paths.signIn} exact component={SignIn} />
+        <Route path={Paths.register} exact component={Register} />
+        <Route path={Paths.settings} exact component={Settings} />
+        <Route path={Paths.feed} exact component={Feed} />
+        <Route path={Paths.requests} exact component={Requests} />
+        <Route path={Paths.search} exact component={Search} />
+        <Route path={Paths.homepage} exact component={HomePage} />
+      </Switch>
   );
 };
 

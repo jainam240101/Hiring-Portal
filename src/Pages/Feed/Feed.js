@@ -28,6 +28,7 @@ const Feed = () => {
   useEffect(() => {
     if (data) {
       const { data: postData, message } = data?.getPosts;
+      console.log(data);
       if (message === "No Data") {
         console.log("Firing");
         sethasMore(false);

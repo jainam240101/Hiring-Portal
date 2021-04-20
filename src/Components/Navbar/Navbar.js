@@ -3,35 +3,18 @@
 import React, { useState, useCallback, useEffect } from "react";
 import classes from "./Navbar.module.css";
 import { GoSearch } from "react-icons/go";
-import { debounce } from "./Helper";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Paths from "../../Constants/paths";
 import { LogoutMutation } from "./apollo/Logout";
 import { useMutation } from "@apollo/client";
 import { cache } from "../../index";
+import path from "../../Constants/paths";
 
 const Navbar = (props) => {
   const [Logout] = useMutation(LogoutMutation);
   const { showSideDrawer } = props;
   const history = useHistory();
-  const location = useLocation();
   const [search, setSearch] = useState("");
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const [SigninHandler, setSigninHandler] = useState(false);
-  const handleScroll = debounce(() => {
-    const currentScrollPos = window.pageYOffset;
-    setVisible(
-      (prevScrollPos > currentScrollPos &&
-        prevScrollPos - currentScrollPos > 70) ||
-        currentScrollPos < 10
-    );
-    setPrevScrollPos(currentScrollPos);
-  }, 100);
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [prevScrollPos, visible, handleScroll]);
 
   useEffect(() => {
     let queryParams = {};
@@ -45,12 +28,6 @@ const Navbar = (props) => {
     // console.log(queryParams.q, queryParams);
   }, []);
 
-  const buttonHandler = () => {
-    setSigninHandler(!SigninHandler);
-  };
-  const handleChange = useCallback((e) => {
-    setSearch(e.target.value);
-  }, []);
   const navigate = useCallback(() => {
    // history.push("/search");
   }, [search]);
@@ -65,15 +42,13 @@ const Navbar = (props) => {
       console.log(cache.data.data);
       const { data } = await Logout();
       console.log(data);
-      history.push("/signin");
+      history.push(path.signIn);
     } catch (error) {
-      history.push("/signin");
+      history.push(path.signIn);
     }
   };
   return (
-    <div
-      className={classes.Container}
-      style={{ top: visible ? "0" : "-100px" }}>
+    <div className={classes.Container}>
       <div className={classes.searchContainer}>
         <GoSearch size={25} onClick={navigate} style={{ cursor: "pointer" }} />
         {/* <input

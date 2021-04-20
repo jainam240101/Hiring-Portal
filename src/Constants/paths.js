@@ -7,6 +7,10 @@ const path = {
   homepage: "/",
   register: "/register",
   feed: "/feed",
+  posts: "/post/:postId",
+  createPostPath: (id) => {
+    return `/post/${id}`;
+  },
   profile: "/profile/:userId",
   /**
    * It creates new user profile part to hit
