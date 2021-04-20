@@ -179,9 +179,9 @@ const Header = ({ userData, userRelation }) => {
   }, []);
 
   let Navigate = useCallback(() => {
-    alert("next");
+      history.push(path.settings);
   }, []);
-  // history.push(path.settings);
+ 
   const closeModal = useCallback(() => {
     setDisplayModal(false);
   }, [displayModal]);

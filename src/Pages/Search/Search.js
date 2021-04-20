@@ -107,11 +107,12 @@ const Search = () => {
             Submit
           </button>
         </div>
-        <div>
+        <div >
           <InfiniteScroll
             dataLength={result.length}
             hasMore={hasMore}
             next={fetchMoredata}
+            style={{display:'flex',flexWrap:'wrap',flexDirection:'row'}}
             endMessage={
               <p style={{ textAlign: "center" }}>
                 <b>Yay! You have seen it all</b>

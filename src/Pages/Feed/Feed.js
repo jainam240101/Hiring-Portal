@@ -78,18 +78,16 @@ const Feed = () => {
     <Page>
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flex: 1,
-          flexDirection: "column",
-          padding: "2% 15%",
-        }}>
+          margin: "auto",
+          width: "75%",
+          padding: "2% 5%",
+        }}
+      >
         <div className={classes.newPost}>
           <div>
             <img
               src={profiledata?.getMe.profilePic}
-              alt='ProfilePic'
+              alt="ProfilePic"
               className={classes.images}
               style={{ objectFit: "contain" }}
             />
@@ -102,28 +100,24 @@ const Feed = () => {
         </div>
 
         {!loading && feedData.length > 0 && (
-          <div style={{ width: "100%" }}>
-            <InfiniteScroll
-              dataLength={feedData.length}
-              next={fetchMoredata}
-              hasMore={hasMore}
-              endMessage={
-                <p style={{ textAlign: "center" }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }
-              loader={<h4>Loading....</h4>}>
-              {feedData.map((item, index) => {
-                return (
-                  <Card
-                    data={item}
-                    key={item.id}
-                    userData={profiledata?.getMe}
-                  />
-                );
-              })}
-            </InfiniteScroll>
-          </div>
+          <InfiniteScroll
+            dataLength={feedData.length}
+            next={fetchMoredata}
+            hasMore={hasMore}
+            style={{ padding: "0 0.5% " }}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+            loader={<h4>Loading....</h4>}
+          >
+            {feedData.map((item, index) => {
+              return (
+                <Card data={item} key={item.id} userData={profiledata?.getMe} />
+              );
+            })}
+          </InfiniteScroll>
         )}
 
         <Modal displayModal={modal} closeModal={modalHandler}>

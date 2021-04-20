@@ -208,7 +208,7 @@ const Settings = () => {
                 ))}
               </div>
             </div>
-            <div>
+            <div className={classes.center}>
               <img
                 className={classes.image}
                 src={state.profilePic}

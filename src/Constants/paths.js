@@ -19,6 +19,7 @@ const path = {
   settings: "/settings",
   requests: "/requests",
   search: "/search",
+  temp:"/"
   // createSearchPath: (search) => {
   //   return `/search?q=${search}`;
   // },

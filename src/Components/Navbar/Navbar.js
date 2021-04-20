@@ -52,7 +52,7 @@ const Navbar = (props) => {
     setSearch(e.target.value);
   }, []);
   const navigate = useCallback(() => {
-    history.push("/search");
+   // history.push("/search");
   }, [search]);
   const onKeyUp = (event) => {
     if (event.keyCode === 13) {
@@ -88,9 +88,9 @@ const Navbar = (props) => {
         /> */}
       </div>
       <div>
-        <button onClick={logoutHandler} className={classes.Logoutbtn}>
+        {/* <button onClick={logoutHandler} className={classes.Logoutbtn}>
           Logout
-        </button>
+        </button> */}
       </div>
       <div onClick={() => showSideDrawer(true)} className={classes.hamburger}>
         <div className={classes.lines}></div>
