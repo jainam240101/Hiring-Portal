@@ -3,6 +3,7 @@
 .flex {
   width: 100%;
   display: flex;
+  flex-direction: column;
   font-family: "Open Sans", sans-serif;
   letter-spacing: 0.1rem;
 }
@@ -10,12 +11,12 @@
 .SideBar {
   overflow: auto;
   position: sticky;
-  width: 20%;
+  width: 100vw;
   height: 100%;
   top: 0;
 }
 .children {
-  width: 80%;
+  width: 100%;
   font-family: "Open Sans", sans-serif;
   letter-spacing: 0.1rem;
 }

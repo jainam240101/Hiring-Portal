@@ -92,13 +92,14 @@ const Requests = (props) => {
       ) : (
         <div className={classes.pageContainer}>
           {requestedUsers?.map((item, index) => (
+           
             <ProfileCard
               userData={item}
               navigateToProfile={navigateToProfile}
               key={item.id}
               acceptFollowRequestHandle={acceptFollowRequestHandle}
               declineFollowRequestHandle={declineFollowRequestHandle}
-            />
+          />
           ))}
         </div>
       )}

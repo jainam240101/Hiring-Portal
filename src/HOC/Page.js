@@ -15,7 +15,7 @@ const Page = ({ children }) => {
           <SideDrawer />
         </div>
         <div className={classes.children}>
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
         </div>
       </div>

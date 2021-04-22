@@ -21,8 +21,8 @@
 }
 
 .img {
-  width: 300px;
-  height: 300px;
+  width: 45vw;
+  height: 400px;
   object-fit: cover;
   /* border-radius: 50%; */
 }

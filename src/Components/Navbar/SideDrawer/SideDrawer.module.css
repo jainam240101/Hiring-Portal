@@ -1,23 +1,25 @@
 /** @format */
 
 .Container {
-  overflow: hidden;
-  position: fixed;
-  top: 0;
   background-color: #f6f6f6;
-  height: 100%;
-  width: 20vw;
+  height: 10vh;
+  width: 100vw;
   font-family: "Open Sans", sans-serif;
-  padding: 0 2%;
+  padding: 0 3%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .heading {
   margin: 0;
   text-align: start;
-  margin-top: 10%;
   font-size: 2rem;
 }
 .subContainer {
-  margin-top: 3%;
+  display: flex;
+  height: 100%;
+  flex-direction: row;
 }
 .notActive:hover {
   cursor: pointer;
@@ -32,27 +34,26 @@
 }
 .activeLink {
   display: flex;
-  padding: 3% 5%;
-  margin-top: 5%;
   background-color: #0984e3;
-  border-radius: 5px;
   font-size: 1.1rem;
   color: white;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  height: 100%;
+  padding: 0 10px;
 }
 .notActive {
   display: flex;
-  padding: 3% 5%;
-  margin-top: 5%;
+  flex-grow: 1;
   font-size: 1.1rem;
-  display: flex;
   justify-content: flex-start;
   align-items: center;
+  height: 100%;
+  padding: 0 10px;
 }
 .link {
-  margin-left: 10%;
+  margin-left: 10px;
   font-size: 1.2rem;
 }
 @keyframes moveRight {

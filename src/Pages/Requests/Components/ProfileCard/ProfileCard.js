@@ -22,21 +22,22 @@ const ProfileCard = ({
       className={classes.container}
       onClick={navigateToProfile.bind(this, id)}
     >
-      <img src={profilePic} className={classes.image}></img>
-      <span className={classes.name}>{name}</span>
-      <button
-        className={classes.btn}
-        onClickCapture={acceptClick}
-      >
-        Accept
-      </button>
-      <button
-        className={classes.btn}
-        style={{ color: "red" }}
-        onClickCapture={declineClick}
-      >
-        Decline
-      </button>
+      <div className={classes.imageContainer}>
+        <img src={profilePic} className={classes.image}></img>
+      </div>
+      <div style={{padding:'4% 8%'}}>
+        <span className={classes.name}>{name}</span>
+        <button className={classes.btn} onClickCapture={acceptClick}>
+          Accept
+        </button>
+        <button
+          className={classes.btn}
+          style={{ color: "red" }}
+          onClickCapture={declineClick}
+        >
+          Decline
+        </button>
+      </div>
     </div>
   );
 };
