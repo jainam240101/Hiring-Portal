@@ -15,7 +15,6 @@ import Settings from "./Pages/User Settings/Settings";
 import Requests from "./Pages/Requests/Requests";
 import Search from "./Pages/Search/Search";
 import Post from "./Pages/Post/Post";
-
 const App = () => {
   const { data, error } = useQuery(me);
   const history = useHistory();
@@ -41,7 +40,7 @@ const App = () => {
       });
        }
   } catch (error) {
-    // console.log("erro", JSON.stringify(error, null, 2));
+    console.log("erro", JSON.stringify(error, null, 2));
   }
   return (
       <Switch>
