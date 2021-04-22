@@ -13,27 +13,15 @@ import Paths from "../../../Constants/paths";
  * This object stores our side bar data but in cleanner way
  * Just add icon , title and the path where you want to navigate to that's it
  */
-const navBar = {
-  Feed: [
-    // { Icon: HiHome, title: "Home", path: Paths.homepage },
-    { Icon: MdFeedback, title: "Feed", path: Paths.feed },
-    { Icon: IoIosBriefcase, title: "Jobs", path: Paths.temp },
-  ],
-  "User Information": [
-    {
-      Icon: RiProfileLine,
-      title: "Profile",
-      path: Paths.profile,
-      createUrlPath: Paths.createProfilePath,
-    },
-    { Icon: GrGroup, title: "Requests", path: Paths.requests },
-    { Icon: MdNotificationsActive, title: "Notifications", path: Paths.temp },
-  ],
-  // "Other Information": [
-  //   { Icon: FcPrivacy, title: "Privacy Policy", path: Paths.temp },
-  //   { Icon: FcServices, title: "Terms Of Service", path: Paths.temp },
-  //   { Icon: FcContacts, title: "Contact Us", path: Paths.temp },
-  // ],
-};
+const navBar = [
+  { Icon: MdFeedback, title: "Feed", path: Paths.feed },
+  {
+    Icon: RiProfileLine,
+    title: "Profile",
+    path: Paths.profile,
+    createUrlPath: Paths.createProfilePath,
+  },
+  { Icon: GrGroup, title: "Requests", path: Paths.requests },
+];
 
 export default navBar;

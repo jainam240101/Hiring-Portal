@@ -18,7 +18,7 @@ const Comments = ({ profilePic, name, comment, nested, userId }) => {
           <img src={profilePic} alt="Profile Pic" />
         </div>
         <div className={classes.topContainer}>
-          <div className={classes.name}>{name}</div>
+          <div className={classes.name}>{name} :: </div>
           <div className={classes.options}>
             {/* <span className={classes.margin}>{time}</span> */}
             {/* <BsThreeDots size={25} /> */}

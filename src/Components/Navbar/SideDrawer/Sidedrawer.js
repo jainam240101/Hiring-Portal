@@ -26,32 +26,25 @@ const SideDrawer = () => {
   return (
     <div className={classes.Container}>
       <h1 className={classes.heading}>Talent Hunt</h1>
-      <div>
-        {Object.keys(navBar).map((item, index) => {
+      <div className={classes.subContainer}>
+        {navBar.map((data, index) => {
+          let { Icon, title, path, createUrlPath } = data;
+          path =
+            createUrlPath !== undefined
+              ? createUrlPath(profiledata?.getMe.id)
+              : `/${path?.split("/")[1]}`;
+
           return (
-            <div className={classes.subContainer}>
-              <h3 className={classes.subHeading}>{item}</h3>
-              {navBar[item].map((data, index) => {
-                let { Icon, title, path, createUrlPath } = data;
-
-                path =
-                  createUrlPath !== undefined
-                    ? createUrlPath(profiledata?.getMe.id)
-                    : `/${path?.split("/")[1]}`;
-
-                return (
-                  <div
-                    onClick={onClickHandler.bind(this, path)}
-                    className={
-                      state === path ? classes.activeLink : classes.notActive
-                    }>
-                    <Icon size={20} />
-                    <div className={classes.link}>
-                      <span>{title}</span>
-                    </div>
-                  </div>
-                );
-              })}
+            <div
+              onClick={onClickHandler.bind(this, path)}
+              className={
+                state === path ? classes.activeLink : classes.notActive
+              }
+            >
+              <Icon size={20} />
+              <div className={classes.link}>
+                <span>{title}</span>
+              </div>
             </div>
           );
         })}
